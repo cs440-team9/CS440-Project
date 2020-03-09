@@ -4,6 +4,7 @@ import { Layout, Menu, Icon } from 'antd';
 
 import { Home } from './components/Home';
 import { About } from './components/About';
+import DatabaseTableHandler from './components/DatabaseTableHandler';
 
 import styles from './CSS/App.module.css';
 
@@ -25,6 +26,15 @@ export default class App extends Component {
 		/* This is a really messy way of doing this, but it doesn't really matter. */
 		if (URL.includes('about')) {
 			page = '2';
+		} else if (URL.includes('book')) {
+			page = 's1-1';
+			subMenu = 's1';
+		} else if (URL.includes('author')) {
+			page = 's1-2';
+			subMenu = 's1';
+		} else if (URL.includes('publisher')) {
+			page = 's1-3';
+			subMenu = 's1';
 		}
 
 		this.state = {
@@ -79,6 +89,28 @@ export default class App extends Component {
 								<span>About</span>
 								<Link to="/about" />
 							</Menu.Item>
+							<SubMenu
+								key="s1"
+								title={
+									<span>
+										<Icon type="table" className={styles.MenuIcon} />
+										<span>View Tables</span>
+									</span>
+								}
+							>
+								<Menu.Item key="s1-1" onClick={this.menuSwap}>
+									<span>Book</span>
+									<Link to="/book" />
+								</Menu.Item>
+								<Menu.Item key="s1-2" onClick={this.menuSwap}>
+									<span>Department</span>
+									<Link to="/department" />
+								</Menu.Item>
+								<Menu.Item key="s1-3" onClick={this.menuSwap}>
+									<span>Open Role</span>
+									<Link to="/openRole" />
+								</Menu.Item>
+							</SubMenu>
 						</Menu>
 					</Sider>
 
@@ -86,6 +118,11 @@ export default class App extends Component {
 						<Content className={styles.AppContent}>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/about" component={About} />
+
+							{/* Sub-Menu for tables */}
+							<Route path="/book" render={(props) => <DatabaseTableHandler {...props} pageType="Book" />} />
+							<Route path="/author" render={(props) => <DatabaseTableHandler {...props} pageType="Author" />} />
+							<Route path="/publisher" render={(props) => <DatabaseTableHandler {...props} pageType="Publisher" />} />
 						</Content>
 						<Footer className={styles.AppFooter}>
 							Ant Design &copy;2016 Created by Ant UED

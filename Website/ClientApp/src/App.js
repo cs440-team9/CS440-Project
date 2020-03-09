@@ -7,7 +7,7 @@ import { About } from './components/About';
 
 import styles from './CSS/App.module.css';
 
-//export const serverURL = "http://access.engr.oregonstate.edu:8088/"
+export const serverURL = "http://access.engr.oregonstate.edu:8088/"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;

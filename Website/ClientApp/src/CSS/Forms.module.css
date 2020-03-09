@@ -1,0 +1,11 @@
+﻿.TableHeader {
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.ButtonIcon {
+	font-size: 12pt;
+	position: relative;
+	bottom: 3px;
+}

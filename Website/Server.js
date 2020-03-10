@@ -65,5 +65,58 @@ app.post('/add_to_book', function (req, res, next) {
 	});
 });
 
+// Add a row to ex_author
+app.post('/add_to_author', function (req, res, next) {
+	var authorID = parseInt(req.body.authorID.charAt(0));
+	var name = req.body.name;
+	var dob = req.body.dob
+	var dod = null;
+
+	if (req.body.dod !== null)
+		dod = req.body.dod;
+
+	var query = `INSERT INTO ex_author
+				(
+					authorID, name, dob, dod
+				)
+				VALUES
+				(
+					?, ?, ?, ?
+				)`;
+
+	mysql.pool.query(query, [authorID, name, dob, dod], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully inserted row into ex_author.' });
+	});
+});
+
+// Add a row to ex_publisher
+app.post('/add_to_author', function (req, res, next) {
+	var publisherID = parseInt(req.body.publisherID.charAt(0));
+	var name = req.body.name;
+
+	var query = `INSERT INTO ex_publisher
+				(
+					publisherID, name
+				)
+				VALUES
+				(
+					?, ?, ?, ?
+				)`;
+
+	mysql.pool.query(query, [publisherID, name], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully inserted row into ex_publisher.' });
+	});
+});
+
 // Set the server up on the selected port
 app.listen(app.get('port'));

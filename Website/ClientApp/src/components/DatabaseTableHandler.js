@@ -89,7 +89,8 @@ export default class DatabaseTableHandler extends Component {
                     "Accept": "application/json"
                 }
             }).then(async (res) => {
-                res.json().then(async (data) => {
+				res.json().then(async (data) => {
+					console.log(data);
                     // Copy this.state.tableData into a new array.
                     var tableDataCopy = [...this.state.tableData];
                     var newData = "";
@@ -103,7 +104,7 @@ export default class DatabaseTableHandler extends Component {
                         else
                             authID = parseInt(tableDataCopy[i].authorID);
 
-                        newData = data.find(item => item.authorID === authID).name;
+                        newData = data.find(item => item.authorID == authID).name;
 
                         tableDataCopy[i].authorID = newData;
                     }
@@ -119,7 +120,8 @@ export default class DatabaseTableHandler extends Component {
                     "Accept": "application/json"
                 }
             }).then(async (res) => {
-                res.json().then(async (data) => {
+				res.json().then(async (data) => {
+					console.log(data);
                     // Copy this.state.tableData into a new array.
                     var tableDataCopy = [...this.state.tableData];
                     var newData = "";
@@ -133,7 +135,7 @@ export default class DatabaseTableHandler extends Component {
                         else
                             pubID = parseInt(tableDataCopy[i].publisherID);
 
-                        newData = data.find(item => item.publisherID === pubID).name;
+                        newData = data.find(item => item.publisherID == pubID).name;
 
                         tableDataCopy[i].publisherID = newData;
                     }

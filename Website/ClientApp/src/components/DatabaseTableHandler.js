@@ -138,8 +138,10 @@ export default class DatabaseTableHandler extends Component {
             callBody.date_published = formData.date_published;
             callBody.title = toTitleCase(formData.title);
             callBody.genre = toTitleCase(formData.genre);
-            callBody.authorID = formData.authorID;
-            callBody.publisherID = formData.publisherID;
+            callBody.authorID = parseInt(formData.authorID);
+			callBody.publisherID = parseInt(formData.publisherID);
+
+			console.log(callBody);
         } else if (pageType === 'author') {
             if (keyNum !== -1)
                 callBody.authorID = keyNum;
@@ -158,11 +160,12 @@ export default class DatabaseTableHandler extends Component {
         if (keyNum === -1) {
             // Add the new item to the correct table
             await fetch(serverURL + "add_to_" + pageType, {
-                method: "POST",
+                method: 'POST',
                 mode: 'cors',
                 body: JSON.stringify(callBody),
                 headers: {
-                    "Content-Type": "application/json"
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
                 }
             }).then((res) => {
                 res.json().then((data) => {
@@ -172,11 +175,12 @@ export default class DatabaseTableHandler extends Component {
         } else {
             // Update the new item in the correct table
             await fetch(serverURL + "update_" + pageType, {
-                method: "PUT",
+                method: 'PUT',
                 mode: 'cors',
                 body: JSON.stringify(callBody),
                 headers: {
-                    "Content-Type": "application/json"
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
                 }
             }).then((res) => {
                 res.json().then((data) => {

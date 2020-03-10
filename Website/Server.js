@@ -57,6 +57,7 @@ app.post('/add_to_book', function (req, res, next) {
 
 	mysql.pool.query(query, [ISBN, date_published, title, genre, authorID, publisherID], function (err, rows, fields) {
 		if (err) {
+			res.json({ msg: err });
 			next(err);
 			return;
 		}

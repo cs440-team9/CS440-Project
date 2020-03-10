@@ -35,7 +35,7 @@ app.get('/get_table/:tableID', function (req, res, next) {
 
 // Add a row to ex_book
 app.post('/add_to_book', function (req, res, next) {
-	var ISBN = parseInt(req.body.fname.charAt(0));
+	var ISBN = parseInt(req.body.ISBN.charAt(0));
 	var datePublished = null;
 	var title = req.body.title;
 	var genre = req.body.genre;

@@ -80,7 +80,7 @@ export default class DatabaseTableHandler extends Component {
             });
         }).catch(err => err);
 
-		/*
+
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
         if (pageType === 'book') {
 			// Replace all instances of authorID with the associated name
@@ -100,10 +100,8 @@ export default class DatabaseTableHandler extends Component {
                     for (let i = 0; i < tableDataCopy.length; i++) {
                         var authID = null;
 
-                        if (typeof tableDataCopy[i].authorID === 'string')
-                            authID = parseInt(tableDataCopy[i].authorID.charAt(0));
-                        else
-                            authID = parseInt(tableDataCopy[i].authorID);
+						authID = parseInt(tableDataCopy[i].authorID);
+
 						console.log(authID);
                         newData = data.find(item => item.authorID == authID).name;
 
@@ -114,6 +112,7 @@ export default class DatabaseTableHandler extends Component {
                 });
             }).catch(err => err);
 
+			/*
 			// Do the same thing but for publisher
             await fetch(serverURL + "get_table/ex_publisher", {
                 method: "GET",
@@ -144,8 +143,8 @@ export default class DatabaseTableHandler extends Component {
                     this.setState({ tableData: tableDataCopy });
                 });
             }).catch(err => err);
+			*/
         }
-		*/
     }
 
 	/* Callback function so form can pass it's data to this component.

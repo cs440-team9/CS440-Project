@@ -95,7 +95,7 @@ app.post('/add_to_author', function (req, res, next) {
 });
 
 // Add a row to ex_publisher
-app.post('/add_to_author', function (req, res, next) {
+app.post('/add_to_publisher', function (req, res, next) {
 	var publisherID = parseInt(req.body.publisherID.charAt(0));
 	var name = req.body.name;
 

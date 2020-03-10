@@ -94,7 +94,7 @@ export default class DatabaseTableHandler extends Component {
                     // Copy this.state.tableData into a new array.
                     var tableDataCopy = [...this.state.tableData];
                     var newData = "";
-
+					console.log(tableDataCopy);
                     // Run through all datapoints in the applicant table, replacing authorID with the author's name
                     for (let i = 0; i < tableDataCopy.length; i++) {
                         var authID = null;
@@ -103,7 +103,7 @@ export default class DatabaseTableHandler extends Component {
                             authID = parseInt(tableDataCopy[i].authorID.charAt(0));
                         else
                             authID = parseInt(tableDataCopy[i].authorID);
-
+						console.log(authID);
                         newData = data.find(item => item.authorID == authID).name;
 
                         tableDataCopy[i].authorID = newData;
@@ -125,7 +125,7 @@ export default class DatabaseTableHandler extends Component {
                     // Copy this.state.tableData into a new array.
                     var tableDataCopy = [...this.state.tableData];
                     var newData = "";
-
+					console.log(tableDataCopy);
                     // Run through all datapoints in the applicant table, replacing authorID with the author's name
                     for (let i = 0; i < tableDataCopy.length; i++) {
                         var pubID = null;
@@ -134,7 +134,7 @@ export default class DatabaseTableHandler extends Component {
                             pubID = parseInt(tableDataCopy[i].publisherID.charAt(0));
                         else
                             pubID = parseInt(tableDataCopy[i].publisherID);
-
+						console.log(pubID);
                         newData = data.find(item => item.publisherID == pubID).name;
 
                         tableDataCopy[i].publisherID = newData;

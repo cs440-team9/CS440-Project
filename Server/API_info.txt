@@ -1,0 +1,24 @@
+Sample URL:
+ISBNdb: https://api.isbndb.com/book/9781934759486
+itbookstore: https://api.itbook.store/1.0/search/mongodb
+nytimes: https://api.nytimes.com/svc/books/v3/reviews.json?author=Stephen+King&api-key=brTY0m2auZ0wbOvgfQfuQ0QDhFGO0byM
+Google: https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyACqXL1PUyD2e1EPvSSU2vji9Eu6xnnUkU
+
+-------------------------------------------------
+ISBNdb ENDPOINT:
+/author/{name} "Gets author details"
+/author/{query} "Search in author DB"
+
+/book/{isbn} "Gets book detail"
+/book/{query} "Search in books DB"
+
+/publisher/{name} "Gets publisher details"
+/publisher/{query} "Search in publisher DB"
+
+/search "Search all ISBNDB"
+
+/stats "Gets status on the ISBNDB"
+
+/subject/{name} "Gets subject detail"
+/subject/{query} "Serach in subjects DB"
+-------------------------------------------------

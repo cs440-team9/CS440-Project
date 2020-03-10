@@ -55,7 +55,7 @@ export default class FormHandler extends Component {
                 return;
 			}
 
-			console.log("Received form values: " + values);
+			console.log("Received form values: ", values);
 
             if (this.state.editing)
                 this.props.formCallback(values, this.state.selectedRowKeys[0]);

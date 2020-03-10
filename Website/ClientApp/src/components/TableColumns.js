@@ -16,8 +16,10 @@ const BookTableColumns = [
         width: 200,
 		sorter: (a, b) => moment(a.date_published).unix() - moment(b.date_published).unix(),
 		render: text => {
-			console.log(typeof text, text);
-			return moment(text).format('LL');
+			if (text === null)
+				return '';
+			else
+				return moment(text).format('LL');
 		},
     },
     {
@@ -64,7 +66,12 @@ const AuthorTableColumns = [
         dataIndex: 'dob',
         width: 200,
 		sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
-		render: text => moment(text).format('LL'),
+		render: text => {
+			if (text === null)
+				return '';
+			else
+				return moment(text).format('LL');
+		},
     },
     {
         title: 'Date of Death',
@@ -72,8 +79,10 @@ const AuthorTableColumns = [
         width: 200,
 		sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
 		render: text => {
-			console.log(typeof text, text);
-			return moment(text).format('LL');
+			if (text === null)
+				return '';
+			else
+				return moment(text).format('LL');
 		},
     },
 ];

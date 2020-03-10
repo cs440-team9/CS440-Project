@@ -226,18 +226,21 @@ app.delete('/delete_author', function (req, res, next) {
 		}
 	});
 
-	// Now that foreign key constraints are deleted, delete from ex_author
-	var query2 = `DELETE FROM ex_author
-				WHERE authorID = ?`;
+	// Wait for one second to ensure that delete happened, to avoid foreign key constraint
+	setTimeout(function () {
+		// Now that foreign key constraints are deleted, delete from ex_author
+		var query2 = `DELETE FROM ex_author
+					WHERE authorID = ?`;
 
-	mysql.pool.query(query2, [authorID], function (err, rows, fields) {
-		if (err) {
-			next(err);
-			return;
-		}
+		mysql.pool.query(query2, [authorID], function (err, rows, fields) {
+			if (err) {
+				next(err);
+				return;
+			}
 
-		res.json({ msg: 'Successfully deleted rows in ex_book with authorID ' + authorID + '. Successfully deleted row ' + authorID + ' from ex_author' });
-	});
+			res.json({ msg: 'Successfully deleted rows in ex_book with authorID ' + authorID + '. Successfully deleted row ' + authorID + ' from ex_author' });
+		});
+	}, 1000);
 });
 
 // Delete a row from ex_publisher based on the publisherID in the body
@@ -256,18 +259,21 @@ app.delete('/delete_publisher', function (req, res, next) {
 		}
 	});
 
-	// Now that foreign key constraints are deleted, delete from ex_publisher
-	var query2 = `DELETE FROM ex_publisher
-				WHERE publisherID = ?`;
+	// Wait for one second to ensure that delete happened, to avoid foreign key constraint
+	setTimeout(function () {
+		// Now that foreign key constraints are deleted, delete from ex_publisher
+		var query2 = `DELETE FROM ex_publisher
+					WHERE publisherID = ?`;
 
-	mysql.pool.query(query2, [publisherID], function (err, rows, fields) {
-		if (err) {
-			next(err);
-			return;
-		}
+		mysql.pool.query(query2, [publisherID], function (err, rows, fields) {
+			if (err) {
+				next(err);
+				return;
+			}
 
-		res.json({ msg: 'Successfully deleted rows in ex_book with publisherID ' + publisherID + '. Successfully deleted row ' + publisherID + ' from ex_publisher' });
-	});
+			res.json({ msg: 'Successfully deleted rows in ex_book with publisherID ' + publisherID + '. Successfully deleted row ' + publisherID + ' from ex_publisher' });
+		});
+	}, 1000);	
 });
 
 // Set the server up on the selected port

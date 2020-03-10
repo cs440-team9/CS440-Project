@@ -10,8 +10,9 @@ const BookTableColumns = [
     {
         title: 'Date Published',
         dataIndex: 'date_published',
-        width: 100,
-        sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
+        width: 200,
+		sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
+		render: text => moment(text).format('LL'),
     },
     {
         title: 'Title',
@@ -27,13 +28,13 @@ const BookTableColumns = [
     {
         title: 'Author ID',
         dataIndex: 'authorID',
-        width: 100,
+        width: 250,
         sorter: (a, b) => a.authorID - b.authorID,
     },
     {
         title: 'Publisher ID',
         dataIndex: 'publisherID',
-        width: 100,
+        width: 250,
         sorter: (a, b) => a.authorID - b.authorID,
     },
 ];

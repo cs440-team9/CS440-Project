@@ -38,7 +38,7 @@ export default class DatabaseTableHandler extends Component {
 		 * width, and what key to use at the row's unique identifier. */
         if (pageType === 'Book') {
             this.columns = BookTableColumns;
-            this.tableWidth = 1000;
+            this.tableWidth = 1500;
             this.rowKey = "ISBN";
         }
         else if (pageType === 'Author') {
@@ -67,7 +67,6 @@ export default class DatabaseTableHandler extends Component {
 			}
 		}).then(async (res) => {
 			res.json().then(async (data) => {
-				console.log(data);
 				// Copy this.state.tableData into a new array.
 				var tableDataCopy = [...this.state.tableData];
 				var newData = "";
@@ -75,7 +74,6 @@ export default class DatabaseTableHandler extends Component {
 				// Run through all datapoints in the table, replacing ID with associated name
 				for (let i = 0; i < tableDataCopy.length; i++) {
 					var ID = parseInt(tableDataCopy[i][type + 'ID']);
-					console.log(ID);
 					console.log(data.find(item => item[type + 'ID'] == ID));
 					newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
 
@@ -236,8 +234,6 @@ export default class DatabaseTableHandler extends Component {
     render() {
         var { tableData, tableLoading } = this.state;
         const { pageType } = this.props;
-
-		console.log(tableData);
 
         return (
             <Fragment>

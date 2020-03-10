@@ -17,7 +17,7 @@ const BookTableColumns = [
 		sorter: (a, b) => moment(a.date_published).unix() - moment(b.date_published).unix(),
 		render: text => {
 			console.log(typeof text, text);
-			moment(text).format('LL');
+			return moment(text).format('LL');
 		},
     },
     {
@@ -71,7 +71,10 @@ const AuthorTableColumns = [
         dataIndex: 'dod',
         width: 200,
 		sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
-		render: text => moment(text).format('LL'),
+		render: text => {
+			console.log(typeof text, text);
+			return moment(text).format('LL');
+		},
     },
 ];
 

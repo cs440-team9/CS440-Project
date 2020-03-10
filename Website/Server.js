@@ -2,6 +2,7 @@
 var bodyParser = require('body-parser');
 var mysql = require('./dbcon.js');
 var cors = require('cors');
+var moment = require('moment');
 
 var app = express();
 
@@ -43,7 +44,7 @@ app.post('/add_to_book', function (req, res, next) {
 	var publisherID = parseInt(req.body.publisherID.charAt(0));
 
 	if (req.body.datePublished !== null)
-		date_published = req.body.date_published;
+		date_published = moment(req.body.date_published).format("YYYY-MM-DD");
 
 	var query = `INSERT INTO ex_book
 				(

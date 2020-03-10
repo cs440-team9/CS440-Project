@@ -80,8 +80,7 @@ export default class DatabaseTableHandler extends Component {
             });
         }).catch(err => err);
 
-		console.log(this.state.tableData);
-
+		/*
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
         if (pageType === 'book') {
 			// Replace all instances of authorID with the associated name
@@ -146,6 +145,7 @@ export default class DatabaseTableHandler extends Component {
                 });
             }).catch(err => err);
         }
+		*/
     }
 
 	/* Callback function so form can pass it's data to this component.
@@ -267,6 +267,8 @@ export default class DatabaseTableHandler extends Component {
     render() {
         var { tableData, tableLoading } = this.state;
         const { pageType } = this.props;
+
+		console.log(tableData);
 
         return (
             <Fragment>

@@ -67,7 +67,6 @@ app.post('/add_to_book', function (req, res, next) {
 
 // Add a row to ex_author
 app.post('/add_to_author', function (req, res, next) {
-	var authorID = parseInt(req.body.authorID.charAt(0));
 	var name = req.body.name;
 	var dob = req.body.dob
 	var dod = null;
@@ -77,14 +76,14 @@ app.post('/add_to_author', function (req, res, next) {
 
 	var query = `INSERT INTO ex_author
 				(
-					authorID, name, dob, dod
+					name, dob, dod
 				)
 				VALUES
 				(
-					?, ?, ?, ?
+					?, ?, ?
 				)`;
 
-	mysql.pool.query(query, [authorID, name, dob, dod], function (err, rows, fields) {
+	mysql.pool.query(query, [name, dob, dod], function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;
@@ -96,19 +95,18 @@ app.post('/add_to_author', function (req, res, next) {
 
 // Add a row to ex_publisher
 app.post('/add_to_publisher', function (req, res, next) {
-	var publisherID = parseInt(req.body.publisherID.charAt(0));
 	var name = req.body.name;
 
 	var query = `INSERT INTO ex_publisher
 				(
-					publisherID, name
+					name
 				)
 				VALUES
 				(
-					?, ?, ?, ?
+					?
 				)`;
 
-	mysql.pool.query(query, [publisherID, name], function (err, rows, fields) {
+	mysql.pool.query(query, [name], function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;

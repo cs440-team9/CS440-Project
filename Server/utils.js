@@ -1,6 +1,5 @@
 const request = require('request');
-//"https://api.isbndb.com/book/9781934759486"
-//https://api.itbook.store/1.0/search/mongodb
+
 function GET_data(host, endpoint, query, callback){
 	var url = url_builder(host, endpoint, query);
 	console.log("URL: " + url);
@@ -9,7 +8,7 @@ function GET_data(host, endpoint, query, callback){
 	    method: 'GET',
 	    headers: {
 		            'Accept': 'application/json',
-					'X-API-KEY': '43879_e986482c6f7640f72db39d1f6a782ca4'
+					'X-API-KEY': '43879_e986482c6f7640f72db39d1f6a782ca4'//ISBNdb api key
 		        }
 	};
     //Fire request
@@ -30,9 +29,11 @@ exports.GET_data = GET_data;
 function url_builder(host, endpoint, query){
     var url = "";
     if (host == "ISBNdb")
-        url = "https://api.isbndb.com";
+        return "https://api.isbndb.com/" + endpoint + "/" + query;
     else if (host == "itbook")
-        url = "https://api.itbook.store";
-
-    return url + "/" + endpoint + "/" + query;
+        return "https://api.itbook.store/" + endpoint + "/" + query;
+	else if (host == "NYtimes")
+		return "https://api.nytimes.com/svc/books/v3/" + endpoint + "?" + query + "&api-key=brTY0m2auZ0wbOvgfQfuQ0QDhFGO0byM";
+	else if (host == "Google")
+		return "https://www.googleapis.com/books/v1/" + endpoint + "?q=" + query + "&key=AIzaSyACqXL1PUyD2e1EPvSSU2vji9Eu6xnnUkU";
 }

@@ -68,7 +68,7 @@ const AuthorTableColumns = [
         dataIndex: 'dod',
         width: 200,
 		sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
-		render: text => moment(text).format('LL'),
+		render: text => { if (text != null && typeof text != 'undefined') { moment(text).format('LL') } },
     },
 ];
 

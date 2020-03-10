@@ -132,8 +132,10 @@ export default class DatabaseTableHandler extends Component {
         this.setState({ tableLoading: true });
 
         if (pageType === 'book') {
-            if (keyNum !== -1)
-                callBody.ISBN = keyNum;
+			if (keyNum !== -1)
+				callBody.ISBN = keyNum;
+			else
+				callBody.ISBN = parseInt(formData.ISBN);
 
             callBody.date_published = formData.date_published;
             callBody.title = toTitleCase(formData.title);

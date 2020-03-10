@@ -36,15 +36,15 @@ app.get('/get_table/:tableID', function (req, res, next) {
 
 // Add a row to ex_book
 app.post('/add_to_book', function (req, res, next) {
-	var ISBN = parseInt(req.body.ISBN.charAt(0));
+	var ISBN = req.body.ISBN;
 	var date_published = null;
 	var title = req.body.title;
 	var genre = req.body.genre;
-	var authorID = parseInt(req.body.authorID.charAt(0));
-	var publisherID = parseInt(req.body.publisherID.charAt(0));
+	var authorID = req.body.authorID;
+	var publisherID = req.body.publisherID;
 
 	if (req.body.datePublished !== null)
-		date_published = moment(req.body.date_published).format("YYYY-MM-DD");
+		date_published = req.body.date_published;
 
 	var query = `INSERT INTO ex_book
 				(
@@ -123,12 +123,12 @@ app.post('/add_to_publisher', function (req, res, next) {
 
 // Update a row in ex_book based on the ISBN in the body
 app.put('/update_book', function (req, res, next) {
-	var ISBN = parseInt(req.body.ISBN.charAt(0));
+	var ISBN = req.body.ISBN;
 	var date_published = null;
 	var title = req.body.title;
 	var genre = req.body.genre;
-	var authorID = parseInt(req.body.authorID.charAt(0));
-	var publisherID = parseInt(req.body.publisherID.charAt(0));
+	var authorID = req.body.authorID;
+	var publisherID = req.body.publisherID;
 
 	if (req.body.datePublished !== null)
 		date_published = req.body.date_published;
@@ -149,7 +149,7 @@ app.put('/update_book', function (req, res, next) {
 
 // Update a row in ex_author based on the authorID in the body
 app.put('/update_author', function (req, res, next) {
-	var authorID = parseInt(req.body.authorID.charAt(0));
+	var authorID = req.body.authorID;
 	var name = req.body.name;
 	var dob = req.body.dob
 	var dod = null;
@@ -173,7 +173,7 @@ app.put('/update_author', function (req, res, next) {
 
 // Update a row in ex_publisher based on the publisherID in the body
 app.put('/update_publisher', function (req, res, next) {
-	var publisherID = parseInt(req.body.publisherID.charAt(0));
+	var publisherID = req.body.publisherID;
 	var name = req.body.name;
 
 	var query = `UPDATE ex_publisher

@@ -6,7 +6,7 @@ const BookTableColumns = [
     {
         title: 'ISBN',
         dataIndex: 'ISBN',
-        width: 200,
+        width: 175,
 		sorter: (a, b) => a.ISBN - b.ISBN,
 		render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
     },

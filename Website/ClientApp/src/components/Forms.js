@@ -53,7 +53,9 @@ export default class FormHandler extends Component {
         form.validateFields((err, values) => {
             if (err) {
                 return;
-            }
+			}
+
+			console.log("Received form values: " + values);
 
             if (this.state.editing)
                 this.props.formCallback(values, this.state.selectedRowKeys[0]);

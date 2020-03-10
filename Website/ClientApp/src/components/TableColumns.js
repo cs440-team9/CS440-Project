@@ -60,13 +60,15 @@ const AuthorTableColumns = [
         title: 'Date of Birth',
         dataIndex: 'dob',
         width: 200,
-        sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
+		sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
+		render: text => moment(text).format('LL'),
     },
     {
         title: 'Date of Death',
         dataIndex: 'dod',
         width: 200,
-        sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
+		sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
+		render: text => moment(text).format('LL'),
     },
 ];
 
@@ -74,7 +76,7 @@ const PublisherTableColumns = [
     {
         title: 'Publisher ID',
 		dataIndex: 'publisherID',
-		width: 100,
+		width: 125,
         sorter: (a, b) => a.publisherID - b.publisherID,
     },
     {

@@ -125,7 +125,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                             </Col>
                             <Col span={14}>
                                 <Form.Item label="Genre" style={{ marginBottom: "0px" }}>
-                                    {getFieldDecorator('genre', {
+									{getFieldDecorator('genre', {
+										rules: [{ required: true, message: 'Genre is required' }],
                                         initialValue: formData.genre || null,
                                     })(<Input placeholder="Enter book genre..." />)}
                                 </Form.Item>
@@ -136,6 +137,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                             <Col span={12}>
                                 <Form.Item label="Author" style={{ marginBottom: "0px" }}>
 									{getFieldDecorator('authorID', {
+										rules: [{ required: true, message: 'Author is required' }],
 										initialValue: formData.authorID || undefined,
                                     })(
                                         <Select placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
@@ -147,6 +149,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                             <Col span={12}>
                                 <Form.Item label="Publisher" style={{ marginBottom: "0px" }}>
 									{getFieldDecorator('publisherID', {
+										rules: [{ required: true, message: 'Publisher is required' }],
 										initialValue: formData.publisherID || undefined,
                                     })(
                                         <Select placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>

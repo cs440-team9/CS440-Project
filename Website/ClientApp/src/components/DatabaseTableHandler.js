@@ -43,7 +43,7 @@ export default class DatabaseTableHandler extends Component {
         }
         else if (pageType === 'Author') {
             this.columns = AuthorTableColumns;
-            this.tableWidth = 800;
+            this.tableWidth = 825;
             this.rowKey = "authorID";
         }
         else if (pageType === 'Publisher') {

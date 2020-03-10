@@ -80,6 +80,8 @@ export default class DatabaseTableHandler extends Component {
             });
         }).catch(err => err);
 
+		console.log(this.state.tableData);
+
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
         if (pageType === 'book') {
 			// Replace all instances of authorID with the associated name

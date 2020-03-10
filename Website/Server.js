@@ -57,7 +57,6 @@ app.post('/add_to_book', function (req, res, next) {
 
 	mysql.pool.query(query, [ISBN, date_published, title, genre, authorID, publisherID], function (err, rows, fields) {
 		if (err) {
-			res.json({ msg: err });
 			next(err);
 			return;
 		}
@@ -192,7 +191,84 @@ app.put('/update_publisher', function (req, res, next) {
 
 
 
-/**/
+/***************** DELETE functions *****************/
+
+// Delete a row from ex_book based on the ISBN in the body
+app.delete('/delete_book', function (req, res, next) {
+	var ISBN = req.body.ISBN;
+
+	var query = `DELETE FROM ex_book
+				WHERE ISBN = ?`;
+
+	mysql.pool.query(query, [ISBN], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully deleted row ' + ISBN + ' from ex_book' });
+	});
+});
+
+// Delete a row from ex_author based on the authorID in the body
+app.delete('/delete_author', function (req, res, next) {
+	var authorID = req.body.authorID;
+
+	/* Can't delete an author that's in use in ex_book.
+	 * Must delete any entry in ex_book using said author first. */
+	var query1 = `DELETE FROM ex_book
+				WHERE authorID = ?`;
+
+	mysql.pool.query(query1, [authorID], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+	});
+
+	// Now that foreign key constraints are deleted, delete from ex_author
+	var query2 = `DELETE FROM ex_author
+				WHERE authorID = ?`;
+
+	mysql.pool.query(query2, [authorID], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully deleted rows in ex_book with authorID ' + authorID + '. Successfully deleted row ' + authorID + ' from ex_author' });
+	});
+});
+
+// Delete a row from ex_publisher based on the publisherID in the body
+app.delete('/delete_publisher', function (req, res, next) {
+	var publisherID = req.body.publisherID;
+
+	/* Can't delete a publisher that's in use in ex_book.
+	 * Must delete any entry in ex_book using said publisher first. */
+	var query1 = `DELETE FROM ex_book
+				WHERE publisherID = ?`;
+
+	mysql.pool.query(query1, [publisherID], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+	});
+
+	// Now that foreign key constraints are deleted, delete from ex_publisher
+	var query2 = `DELETE FROM ex_publisher
+				WHERE publisherID = ?`;
+
+	mysql.pool.query(query2, [publisherID], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully deleted rows in ex_book with publisherID ' + publisherID + '. Successfully deleted row ' + publisherID + ' from ex_publisher' });
+	});
+});
 
 // Set the server up on the selected port
 app.listen(app.get('port'));

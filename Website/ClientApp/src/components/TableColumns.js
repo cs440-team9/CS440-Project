@@ -15,7 +15,10 @@ const BookTableColumns = [
         dataIndex: 'date_published',
         width: 200,
 		sorter: (a, b) => moment(a.date_published).unix() - moment(b.date_published).unix(),
-		render: text => moment(text).format('LL'),
+		render: text => {
+			console.log(typeof text, text);
+			moment(text).format('LL');
+		},
     },
     {
         title: 'Title',

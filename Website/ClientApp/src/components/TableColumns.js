@@ -8,7 +8,7 @@ const BookTableColumns = [
         dataIndex: 'ISBN',
         width: 200,
 		sorter: (a, b) => a.ISBN - b.ISBN,
-		render: text => <a href={"https://isbnsearch.org/isbn/" + text}>{text}</a>,
+		render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
     },
     {
         title: 'Date Published',

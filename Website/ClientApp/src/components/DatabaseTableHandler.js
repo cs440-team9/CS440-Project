@@ -58,6 +58,34 @@ export default class DatabaseTableHandler extends Component {
         await this.tableFetch();
     };
 
+	replaceIDs = async (type) => {
+		// Replace all instances of ID with the associated name
+		await fetch(serverURL + "get_table/ex_" + type, {
+			method: "GET",
+			headers: {
+				"Accept": "application/json"
+			}
+		}).then(async (res) => {
+			res.json().then(async (data) => {
+				console.log(data);
+				// Copy this.state.tableData into a new array.
+				var tableDataCopy = [...this.state.tableData];
+				var newData = "";
+
+				// Run through all datapoints in the table, replacing ID with associated name
+				for (let i = 0; i < tableDataCopy.length; i++) {
+					var ID = parseInt(tableDataCopy[i][type + 'ID']);
+
+					newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
+
+					tableDataCopy[i][type + 'ID'] = newData;
+				}
+
+				this.setState({ tableData: tableDataCopy });
+			});
+		}).catch(err => err);
+	}
+
 	// Fetch the appropriate table. If fetching 'ex_book', replace author/publisherIDs with associated names.
     tableFetch = async () => {
         var pageType = this.props.pageType;
@@ -82,68 +110,9 @@ export default class DatabaseTableHandler extends Component {
 
 
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
-        if (pageType === 'book') {
-			// Replace all instances of authorID with the associated name
-            await fetch(serverURL + "get_table/ex_author", {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            }).then(async (res) => {
-				res.json().then(async (data) => {
-					console.log(data);
-                    // Copy this.state.tableData into a new array.
-                    var tableDataCopy = [...this.state.tableData];
-                    var newData = "";
-					console.log(tableDataCopy);
-                    // Run through all datapoints in the applicant table, replacing authorID with the author's name
-                    for (let i = 0; i < tableDataCopy.length; i++) {
-                        var authID = null;
-
-						authID = parseInt(tableDataCopy[i].authorID);
-
-						console.log(authID);
-                        newData = data.find(item => item.authorID == authID).name;
-
-                        tableDataCopy[i].authorID = newData;
-                    }
-
-                    this.setState({ tableData: tableDataCopy });
-                });
-            }).catch(err => err);
-
-			/*
-			// Do the same thing but for publisher
-            await fetch(serverURL + "get_table/ex_publisher", {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            }).then(async (res) => {
-				res.json().then(async (data) => {
-					console.log(data);
-                    // Copy this.state.tableData into a new array.
-                    var tableDataCopy = [...this.state.tableData];
-                    var newData = "";
-					console.log(tableDataCopy);
-                    // Run through all datapoints in the applicant table, replacing authorID with the author's name
-                    for (let i = 0; i < tableDataCopy.length; i++) {
-                        var pubID = null;
-
-                        if (typeof tableDataCopy[i].publisherID === 'string')
-                            pubID = parseInt(tableDataCopy[i].publisherID.charAt(0));
-                        else
-                            pubID = parseInt(tableDataCopy[i].publisherID);
-						console.log(pubID);
-                        newData = data.find(item => item.publisherID == pubID).name;
-
-                        tableDataCopy[i].publisherID = newData;
-                    }
-
-                    this.setState({ tableData: tableDataCopy });
-                });
-            }).catch(err => err);
-			*/
+		if (pageType === 'book') {
+			await this.replaceIDs('author');
+			await this.replaceIDs('publisher');
         }
     }
 

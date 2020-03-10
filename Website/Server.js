@@ -36,15 +36,14 @@ app.get('/get_table/:tableID', function (req, res, next) {
 // Add a row to ex_book
 app.post('/add_to_book', function (req, res, next) {
 	var ISBN = parseInt(req.body.ISBN.charAt(0));
-	var datePublished = null;
+	var date_published = null;
 	var title = req.body.title;
 	var genre = req.body.genre;
 	var authorID = parseInt(req.body.authorID.charAt(0));
 	var publisherID = parseInt(req.body.publisherID.charAt(0));
 
-	if (req.body.datePublished !== null) {
-		datePublished = req.body.datePublished;
-	}
+	if (req.body.datePublished !== null)
+		date_published = req.body.date_published;
 
 	var query = `INSERT INTO ex_book
 				(
@@ -115,6 +114,83 @@ app.post('/add_to_publisher', function (req, res, next) {
 		res.json({ msg: 'Successfully inserted row into ex_publisher.' });
 	});
 });
+
+
+
+/***************** UPDATE functions *****************/
+
+// Update a row in ex_book based on the ISBN in the body
+app.put('/update_book', function (req, res, next) {
+	var ISBN = parseInt(req.body.ISBN.charAt(0));
+	var date_published = null;
+	var title = req.body.title;
+	var genre = req.body.genre;
+	var authorID = parseInt(req.body.authorID.charAt(0));
+	var publisherID = parseInt(req.body.publisherID.charAt(0));
+
+	if (req.body.datePublished !== null)
+		date_published = req.body.date_published;
+
+	var query = `UPDATE ex_book
+				SET ISBN = ?, date_published = ?, title = ?, genre = ?, authorID = ?, publisherID = ?
+				WHERE ISBN = ?`;
+
+	mysql.pool.query(query, [ISBN, date_published, title, genre, authorID, publisherID, ISBN], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully updated row ' + ISBN });
+	});
+});
+
+// Update a row in ex_author based on the authorID in the body
+app.put('/update_author', function (req, res, next) {
+	var authorID = parseInt(req.body.authorID.charAt(0));
+	var name = req.body.name;
+	var dob = req.body.dob
+	var dod = null;
+
+	if (req.body.dod !== null)
+		dod = req.body.dod;
+
+	var query = `UPDATE ex_author
+				SET name = ?, dob = ?, dod = ?
+				WHERE authorID = ?`;
+
+	mysql.pool.query(query, [name, dob, dod, authorID], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully updated row ' + authorID });
+	});
+});
+
+// Update a row in ex_publisher based on the publisherID in the body
+app.put('/update_publisher', function (req, res, next) {
+	var publisherID = parseInt(req.body.publisherID.charAt(0));
+	var name = req.body.name;
+
+	var query = `UPDATE ex_publisher
+				SET name = ?
+				WHERE publisherID = ?`;
+
+	mysql.pool.query(query, [name, publisherID], function (err, rows, fields) {
+		if (err) {
+			next(err);
+			return;
+		}
+
+		res.json({ msg: 'Successfully updated row ' + publisherID });
+	});
+});
+
+
+
+/**/
 
 // Set the server up on the selected port
 app.listen(app.get('port'));

@@ -140,7 +140,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										rules: [{ required: true, message: 'Author is required' }],
 										initialValue: formData.authorID || undefined,
                                     })(
-                                        <Select placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
+                                        <Select showSearch placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
                                             {this.state.authorDropdown}
                                         </Select>
                                     )}
@@ -152,7 +152,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										rules: [{ required: true, message: 'Publisher is required' }],
 										initialValue: formData.publisherID || undefined,
                                     })(
-                                        <Select placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
+                                        <Select showSearch placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
                                             {this.state.publisherDropdown}
                                         </Select>
                                     )}

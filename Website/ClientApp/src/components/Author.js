@@ -69,18 +69,18 @@ const AddAuthorForm = Form.create({ name: 'add-author-form' })(    // Don't forg
                             })(<Input placeholder="Last, First" />)}
                         </Form.Item>
                         <Row gutter={12}>
-                            <Col span={10}>
+                            <Col span={12}>
                                 <Form.Item label="Date of Birth" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('dob', {
                                         rules: [{ required: true, message: 'Date of birth is required' }],
-                                        initialValue: moment(formData.dob) || null,
+                                        initialValue: formData.dob == null ? null : moment(formData.dob),
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>
                             </Col>
-                            <Col span={14}>
+                            <Col span={12}>
                                 <Form.Item label="Date of Death" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('dod', {
-                                        initialValue: moment(formData.dod) || null,
+										initialValue: formData.dod == null ? null : moment(formData.dod),
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>
                             </Col>

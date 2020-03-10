@@ -119,7 +119,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                             <Col span={10}>
                                 <Form.Item label="Date Published" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('date_published', {
-                                        initialValue: moment(formData.date_published) || null,
+										initialValue: formData.date_published == null ? null : moment(formData.date_published),
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>
                             </Col>
@@ -135,8 +135,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                         <Row gutter={12}>
                             <Col span={12}>
                                 <Form.Item label="Author" style={{ marginBottom: "0px" }}>
-                                    {getFieldDecorator('authorID', {
-                                        initialValue: formData.authorID || null,
+									{getFieldDecorator('authorID', {
+										initialValue: formData.authorID || undefined,
                                     })(
                                         <Select placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
                                             {this.state.authorDropdown}
@@ -146,8 +146,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                             </Col>
                             <Col span={12}>
                                 <Form.Item label="Publisher" style={{ marginBottom: "0px" }}>
-                                    {getFieldDecorator('genre', {
-                                        initialValue: formData.genre || null,
+									{getFieldDecorator('publisherID', {
+										initialValue: formData.publisherID || undefined,
                                     })(
                                         <Select placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
                                             {this.state.publisherDropdown}

@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { DatePicker, Form, Input, Modal, Row, Col } from 'antd';
+import moment from 'moment';
 
 const dateFormat = 'YYYY/MM/DD';
 
@@ -72,14 +73,14 @@ const AddAuthorForm = Form.create({ name: 'add-author-form' })(    // Don't forg
                                 <Form.Item label="Date of Birth" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('dob', {
                                         rules: [{ required: true, message: 'Date of birth is required' }],
-                                        initialValue: formData.dob || null,
+                                        initialValue: moment(formData.dob) || null,
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>
                             </Col>
                             <Col span={14}>
                                 <Form.Item label="Date of Death" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('dod', {
-                                        initialValue: formData.dod || null,
+                                        initialValue: moment(formData.dod) || null,
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>
                             </Col>

@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { DatePicker, Form, Input, Modal, Row, Col, Select } from 'antd';
 import { serverURL } from '../App';
+import moment from 'moment';
 
 const { Option } = Select;
 
@@ -118,7 +119,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                             <Col span={10}>
                                 <Form.Item label="Date Published" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('date_published', {
-                                        initialValue: formData.date_published || null,
+                                        initialValue: moment(formData.date_published) || null,
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>
                             </Col>

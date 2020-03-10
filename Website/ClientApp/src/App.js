@@ -103,7 +103,7 @@ export default class App extends Component {
 									<Link to="/book" />
 								</Menu.Item>
 								<Menu.Item key="s1-2" onClick={this.menuSwap}>
-									<span>AUthor</span>
+									<span>Author</span>
 									<Link to="/author" />
 								</Menu.Item>
 								<Menu.Item key="s1-3" onClick={this.menuSwap}>

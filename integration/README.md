@@ -5,6 +5,7 @@ This portion of the project involves pulling a massive amount of data from exter
 
 ### Open Library API
 
+- Add bash script to automate adding a letter to search queries
 - Also for queries 'ab' to 'zb'
 - Retrieved and integrated books from Open Library API with queries from 'a' to 'z', and 'aa' to 'za'.
 

@@ -3,9 +3,10 @@ node_modules/
 # credentials file
 config.js
 
-# data files
+# output files
 *.xml
 *.csv
 *error.txt
 *.error
+*.log
 open-library.json

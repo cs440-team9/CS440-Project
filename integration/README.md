@@ -3,7 +3,10 @@ This portion of the project involves pulling a massive amount of data from exter
 
 ## Progress Log
 
-- Retrieved and integrated books from Open Library API with queries from 'a' to 'z', and 'aa' to 'az'.
+### Open Library API
+
+- Also for queries 'ab' to 'zb'
+- Retrieved and integrated books from Open Library API with queries from 'a' to 'z', and 'aa' to 'za'.
 
 
 ## Execution

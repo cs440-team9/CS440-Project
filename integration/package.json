@@ -1,0 +1,12 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "This portion of the project involves pulling a massive amount of data from external APIs, process them, and integrate only the necessary parts into MariaDB.",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

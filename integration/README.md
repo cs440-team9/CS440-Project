@@ -1,5 +1,11 @@
 This portion of the project involves pulling a massive amount of data from external APIs, process them, and integrate only the necessary parts into MariaDB.
 
+
+## Progress Log
+
+- Retrieved and integrated books from Open Library API with queries from 'a' to 'z', and 'aa' to 'az'.
+
+
 ## Execution
 
 For best results, ensure you have Node v12 or higher. (v10 may work, but use at your own risk).

@@ -4,7 +4,8 @@ node_modules/
 config.js
 
 # data files
-goodreads.xml
+*.xml
+*.csv
 *error.txt
 *.error
 open-library.json

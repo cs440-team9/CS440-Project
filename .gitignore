@@ -1,0 +1,8 @@
+node_modules/
+
+# credentials file
+config.js
+
+# data files
+goodreads.xml
+goodreads.error

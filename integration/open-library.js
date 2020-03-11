@@ -25,7 +25,7 @@ async function getBooks() {
           let entry = {
             title: book.title_suggest,
             isbn: book.isbn && book.isbn[0],
-            author_name: book.author_name && book.author_name,
+            author_name: book.author_name && book.author_name[0],
             publish_date: book.publish_date && book.publish_date[0],
             publisher: book.publisher && book.publisher[0]
           };

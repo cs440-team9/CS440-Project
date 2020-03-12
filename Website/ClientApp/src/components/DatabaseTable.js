@@ -177,20 +177,17 @@ export default class DatabaseTable extends Component {
 				setTimeout(() => this.searchInput.select());
 			}
 		},
-		render: text => {
-			if (this.state.searchedColumn === dataIndex) {
-				console.log("in it");
-				return "Oh Wow"
-				/*<Highlighter
+		render: text =>
+			this.state.searchedColumn === dataIndex ? (
+				<Highlighter
 					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
 					searchWords={[this.state.searchText]}
 					autoEscape
 					textToHighlight={text.toString()}
-				/>*/
-			}
-			else
-				return text
-		},
+				/>
+			) : (
+					text
+				),
 	});
 
 	handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -228,7 +225,7 @@ export default class DatabaseTable extends Component {
             spinning: tableLoading,
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
 		}
-		console.log(tableData);
+
         return (
             <Fragment>
                 <div style={{ maxWidth: tableWidth }}>

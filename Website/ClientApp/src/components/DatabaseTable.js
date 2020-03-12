@@ -182,7 +182,7 @@ export default class DatabaseTable extends Component {
 			console.log(this.state.searchedColumn);
 			console.log(dataIndex);
 
-			this.state.searchedColumn === dataIndex ? (
+			return this.state.searchedColumn === dataIndex ? (
 				<Highlighter
 					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
 					searchWords={[this.state.searchText]}

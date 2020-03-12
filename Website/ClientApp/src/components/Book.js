@@ -142,8 +142,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 
 						<Form.Item label="Year Published" style={{ marginBottom: "0px" }}>
 							{getFieldDecorator('year_published', {
-								initialValue: formData.year_published == null ? null : moment(formData.year_published).add(1,'days').format('YYYY'),
-							})(<DatePicker />)}
+								initialValue: formData.year_published == null ? null : moment(formData.year_published).add(1, 'days'),
+							})(<DatePicker format={dateFormat} />)}
 						</Form.Item>
                     </Form>
                 </Modal>

@@ -11,27 +11,21 @@ const BookTableColumns = [
 		render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
     },
     {
-        title: 'Date Published',
-        dataIndex: 'date_published',
+        title: 'Year Published',
+        dataIndex: 'year_published',
         width: 200,
-		sorter: (a, b) => moment(a.date_published).unix() - moment(b.date_published).unix(),
+		sorter: (a, b) => moment(a.year_published).unix() - moment(b.year_published).unix(),
 		render: text => {
 			if (text === null)
 				return '';
 			else
-				return moment(text).format('LL');
+				return moment(text).format('YYYY');
 		},
     },
     {
         title: 'Title',
         dataIndex: 'title',
         sorter: (a, b) => { return a.title.localeCompare(b.title) },
-    },
-    {
-        title: 'Genre',
-        dataIndex: 'genre',
-        width: 200,
-        sorter: (a, b) => { return a.genre.localeCompare(b.genre) },
     },
     {
         title: 'Author ID',

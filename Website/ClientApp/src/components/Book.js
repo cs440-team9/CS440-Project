@@ -14,9 +14,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 
             var data = {
                 ISBN: null,
-                date_published: null,
+                year_published: null,
                 title: '',
-				genre: '',
                 authorID: null,
                 publisherID: null,
             };
@@ -42,9 +41,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                 if (selectedRowKeys.length !== 1) {
                     data = {
                         ISBN: null,
-                        date_published: null,
+                        year_published: null,
                         title: '',
-                        genre: '',
                         authorID: null,
                         publisherID: null,
                     };
@@ -116,24 +114,6 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                         </Form.Item>
 
                         <Row gutter={12}>
-                            <Col span={10}>
-                                <Form.Item label="Date Published" style={{ marginBottom: "0px" }}>
-                                    {getFieldDecorator('date_published', {
-										initialValue: formData.date_published == null ? null : moment(formData.date_published),
-                                    })(<DatePicker format={dateFormat} />)}
-                                </Form.Item>
-                            </Col>
-                            <Col span={14}>
-                                <Form.Item label="Genre" style={{ marginBottom: "0px" }}>
-									{getFieldDecorator('genre', {
-										rules: [{ required: true, message: 'Genre is required' }],
-                                        initialValue: formData.genre || null,
-                                    })(<Input placeholder="Enter book genre..." />)}
-                                </Form.Item>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={12}>
                             <Col span={12}>
                                 <Form.Item label="Author" style={{ marginBottom: "0px" }}>
 									{getFieldDecorator('authorID', {
@@ -158,7 +138,13 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                                     )}
                                 </Form.Item>
                             </Col>
-                        </Row>
+						</Row>
+
+						<Form.Item label="Year Published" style={{ marginBottom: "0px" }}>
+							{getFieldDecorator('year_published', {
+								initialValue: formData.year_published == null ? null : moment(formData.year_published),
+							})(<DatePicker format={dateFormat} />)}
+						</Form.Item>
                     </Form>
                 </Modal>
             )

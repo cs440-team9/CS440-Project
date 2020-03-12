@@ -72,7 +72,6 @@ const AddAuthorForm = Form.create({ name: 'add-author-form' })(    // Don't forg
                             <Col span={12}>
                                 <Form.Item label="Date of Birth" style={{ marginBottom: "0px" }}>
                                     {getFieldDecorator('dob', {
-                                        rules: [{ required: true, message: 'Date of birth is required' }],
                                         initialValue: formData.dob == null ? null : moment(formData.dob),
                                     })(<DatePicker format={dateFormat} />)}
                                 </Form.Item>

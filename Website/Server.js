@@ -37,25 +37,24 @@ app.get('/get_table/:tableID', function (req, res, next) {
 // Add a row to ex_book
 app.post('/add_to_book', function (req, res, next) {
 	var ISBN = req.body.ISBN;
-	var date_published = null;
+	var year_published = null;
 	var title = req.body.title;
-	var genre = req.body.genre;
 	var authorID = req.body.authorID;
 	var publisherID = req.body.publisherID;
 
-	if (req.body.datePublished !== null)
-		date_published = req.body.date_published;
+	if (req.body.year_published !== null)
+		year_published = req.body.year_published;
 
 	var query = `INSERT INTO ex_book
 				(
-					ISBN, date_published, title, genre, authorID, publisherID
+					ISBN, year_published, title, authorID, publisherID
 				)
 				VALUES
 				(
-					?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?
 				)`;
 
-	mysql.pool.query(query, [ISBN, date_published, title, genre, authorID, publisherID], function (err, rows, fields) {
+	mysql.pool.query(query, [ISBN, year_published, title, authorID, publisherID], function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;
@@ -68,8 +67,11 @@ app.post('/add_to_book', function (req, res, next) {
 // Add a row to ex_author
 app.post('/add_to_author', function (req, res, next) {
 	var name = req.body.name;
-	var dob = req.body.dob
+	var dob = null;
 	var dod = null;
+
+	if (req.body.dob !== null)
+		dob = req.body.dob;
 
 	if (req.body.dod !== null)
 		dod = req.body.dod;
@@ -123,20 +125,19 @@ app.post('/add_to_publisher', function (req, res, next) {
 // Update a row in ex_book based on the ISBN in the body
 app.put('/update_book', function (req, res, next) {
 	var ISBN = req.body.ISBN;
-	var date_published = null;
+	var year_published = null;
 	var title = req.body.title;
-	var genre = req.body.genre;
 	var authorID = req.body.authorID;
 	var publisherID = req.body.publisherID;
 
-	if (req.body.datePublished !== null)
-		date_published = req.body.date_published;
+	if (req.body.year_published !== null)
+		year_published = req.body.year_published;
 
 	var query = `UPDATE ex_book
-				SET ISBN = ?, date_published = ?, title = ?, genre = ?, authorID = ?, publisherID = ?
+				SET ISBN = ?, year_published = ?, title = ?, authorID = ?, publisherID = ?
 				WHERE ISBN = ?`;
 
-	mysql.pool.query(query, [ISBN, date_published, title, genre, authorID, publisherID, ISBN], function (err, rows, fields) {
+	mysql.pool.query(query, [ISBN, year_published, title, authorID, publisherID, ISBN], function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;
@@ -150,8 +151,11 @@ app.put('/update_book', function (req, res, next) {
 app.put('/update_author', function (req, res, next) {
 	var authorID = req.body.authorID;
 	var name = req.body.name;
-	var dob = req.body.dob
+	var dob = null;
 	var dod = null;
+
+	if (req.body.dob !== null)
+		dob = req.body.dob;
 
 	if (req.body.dod !== null)
 		dod = req.body.dod;

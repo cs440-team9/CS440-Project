@@ -137,13 +137,10 @@ export default class DatabaseTableHandler extends Component {
 			else
 				callBody.ISBN = parseInt(formData.ISBN);
 
-            callBody.date_published = formData.date_published;
+            callBody.year_published = formData.year_published;
             callBody.title = toTitleCase(formData.title);
-            callBody.genre = toTitleCase(formData.genre);
             callBody.authorID = parseInt(formData.authorID);
 			callBody.publisherID = parseInt(formData.publisherID);
-
-			console.log(callBody);
         } else if (pageType === 'author') {
             if (keyNum !== -1)
                 callBody.authorID = keyNum;

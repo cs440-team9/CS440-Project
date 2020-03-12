@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS `ex_author`;
 CREATE TABLE `ex_author` (
   `authorID` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `dob` date NOT NULL,
+  `dob` date DEFAULT NULL,
   `dod` date DEFAULT NULL,
   PRIMARY KEY (`authorID`)
 ) AUTO_INCREMENT=1;
@@ -75,9 +75,8 @@ DROP TABLE IF EXISTS `ex_book`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ex_book` (
   `ISBN` bigint NOT NULL,
-  `date_published` date DEFAULT NULL,
+  `year_published` date DEFAULT NULL,
   `title` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL,
   `authorID` int(10) NOT NULL,
   `publisherID` int(10) NOT NULL,
   PRIMARY KEY (`ISBN`),
@@ -92,13 +91,13 @@ CREATE TABLE `ex_book` (
 LOCK TABLES `ex_book` WRITE;
 /*!40000 ALTER TABLE `ex_book` DISABLE KEYS */;
 INSERT INTO `ex_book` VALUES
-  (9780241416419,'1949-06-08','Nineteen Eighty-Four','Political Fiction',1,1),
-  (9781846553547,'1945-08-17','Animal Farm','Political Satire',1,1),
-  (9780553380163,'1988-03-01','A Brief History of Time','Cosmology',2,2),
-  (9780618680009,'2006-10-02','The God Delusion','Non-fiction',3,2),
-  (9780192860927,'1990-10-25','The Selfish Gene','Popular Science',3,3),
-  (9780195069051,'1989-03-14','Albion\'s Seed: Four British Folways in America','Non-fiction',4,3),
-  (9780195098310,'1995-04-19','Paul Revere\'s Ride','Biography',4,3),
-  (9780441172719,'1965-08-01','Dune','Science Fiction',5,4);
+  (9780241416419,'1949','Nineteen Eighty-Four',1,1),
+  (9781846553547,'1945','Animal Farm',1,1),
+  (9780553380163,'1988','A Brief History of Time',2,2),
+  (9780618680009,'2006','The God Delusion',3,2),
+  (9780192860927,'1990','The Selfish Gene',3,3),
+  (9780195069051,'1989','Albion\'s Seed: Four British Folways in America',4,3),
+  (9780195098310,'1995','Paul Revere\'s Ride',4,3),
+  (9780441172719,'1965','Dune',5,4);
 /*!40000 ALTER TABLE `ex_book` ENABLE KEYS */;
 UNLOCK TABLES;

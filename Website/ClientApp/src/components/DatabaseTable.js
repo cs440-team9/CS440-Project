@@ -174,6 +174,7 @@ const BookTableColumns = [
 	{
 		title: 'ISBN',
 		dataIndex: 'ISBN',
+		key: 'ISBN',
 		width: 175,
 		sorter: (a, b) => a.ISBN - b.ISBN,
 		render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
@@ -182,6 +183,7 @@ const BookTableColumns = [
 	{
 		title: 'Year Published',
 		dataIndex: 'year_published',
+		key: 'year_published',
 		width: 200,
 		sorter: (a, b) => moment(a.year_published).unix() - moment(b.year_published).unix(),
 		render: text => {
@@ -195,12 +197,14 @@ const BookTableColumns = [
 	{
 		title: 'Title',
 		dataIndex: 'title',
+		key: 'title',
 		sorter: (a, b) => { return a.title.localeCompare(b.title) },
 		...this.getColumnSearchProps('title'),
 	},
 	{
 		title: 'Author ID',
 		dataIndex: 'authorID',
+		key: 'authorID',
 		width: 250,
 		sorter: (a, b) => { return a.authorID.localeCompare(b.authorID) },
 		render: (text, record) => <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link>,
@@ -209,6 +213,7 @@ const BookTableColumns = [
 	{
 		title: 'Publisher ID',
 		dataIndex: 'publisherID',
+		key: 'publisherID',
 		width: 250,
 		sorter: (a, b) => { return a.publisherID.localeCompare(b.publisherID) },
 		render: (text, record) => <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link>,
@@ -220,12 +225,14 @@ const AuthorTableColumns = [
 	{
 		title: 'Author ID',
 		dataIndex: 'authorID',
+		key: 'authorID',
 		sorter: (a, b) => a.authorID - b.authorID,
 		...this.getColumnSearchProps('authorID'),
 	},
 	{
 		title: 'Name',
 		dataIndex: 'name',
+		key: 'name',
 		width: 250,
 		sorter: (a, b) => { return a.name.localeCompare(b.name) },
 		...this.getColumnSearchProps('name'),
@@ -233,6 +240,7 @@ const AuthorTableColumns = [
 	{
 		title: 'Date of Birth',
 		dataIndex: 'dob',
+		key: 'dob',
 		width: 200,
 		sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
 		render: text => {
@@ -246,6 +254,7 @@ const AuthorTableColumns = [
 	{
 		title: 'Date of Death',
 		dataIndex: 'dod',
+		key: 'dod',
 		width: 200,
 		sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
 		render: text => {
@@ -262,6 +271,7 @@ const PublisherTableColumns = [
 	{
 		title: 'Publisher ID',
 		dataIndex: 'publisherID',
+		key: 'publisherID',
 		width: 125,
 		sorter: (a, b) => a.publisherID - b.publisherID,
 		...this.getColumnSearchProps('publisherID'),
@@ -269,6 +279,7 @@ const PublisherTableColumns = [
 	{
 		title: 'Name',
 		dataIndex: 'name',
+		key: 'name',
 		sorter: (a, b) => { return a.name.localeCompare(b.name) },
 		...this.getColumnSearchProps('name'),
 	},

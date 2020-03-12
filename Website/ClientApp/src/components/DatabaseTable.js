@@ -124,7 +124,7 @@ export default class DatabaseTable extends Component {
 				key: 'ISBN',
 				width: 175,
 				sorter: (a, b) => a.ISBN - b.ISBN,
-				render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
+				render: text => { return <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a> },
 				...this.getColumnSearchProps('ISBN'),
 			},
 			{
@@ -132,7 +132,7 @@ export default class DatabaseTable extends Component {
 				dataIndex: 'year_published',
 				key: 'year_published',
 				width: 200,
-				sorter: (a, b) => moment(a.year_published).unix() - moment(b.year_published).unix(),
+				sorter: (a, b) => a.year_published - b.year_published,
 				render: text => {
 					if (text === null)
 						return '';
@@ -154,7 +154,7 @@ export default class DatabaseTable extends Component {
 				key: 'authorID',
 				width: 250,
 				sorter: (a, b) => { return a.authorID.localeCompare(b.authorID) },
-				render: (text, record) => <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link>,
+				render: (text, record) => { return <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link> },
 				...this.getColumnSearchProps('authorID'),
 			},
 			{
@@ -163,7 +163,7 @@ export default class DatabaseTable extends Component {
 				key: 'publisherID',
 				width: 250,
 				sorter: (a, b) => { return a.publisherID.localeCompare(b.publisherID) },
-				render: (text, record) => <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link>,
+				render: (text, record) => { return <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link> },
 				...this.getColumnSearchProps('publisherID'),
 			},
 		];
@@ -194,7 +194,7 @@ export default class DatabaseTable extends Component {
 					if (text === null)
 						return '';
 					else
-						return moment(text).format('LL');
+						return <span>{moment(text).format('LL')}</span>;
 				},
 				...this.getColumnSearchProps('dob'),
 			},
@@ -208,7 +208,7 @@ export default class DatabaseTable extends Component {
 					if (text === null)
 						return 'test';
 					else
-						return moment(text).format('LL');
+						return <span>{moment(text).format('LL')}</span>;
 				},
 				...this.getColumnSearchProps('dod'),
 			},
@@ -272,7 +272,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={BookTableColumns}
+                        columns={this.columns}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

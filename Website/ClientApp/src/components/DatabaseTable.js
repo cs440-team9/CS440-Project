@@ -139,8 +139,11 @@ export default class DatabaseTable extends Component {
 		if (prevProps.dataSource !== this.props.dataSource) {
 			var tempData = [...this.props.dataSource];
 			if (typeof this.props.dataSource.dob !== 'undefined') {
-				tempData.dob = moment(tempData.dob).format('LL');
-				tempData.dod = moment(tempData.dod).format('LL');
+				console.log("in it");
+				console.log(tempData);
+				tempData.dob = tempData.dob.substr(0, tempdata.dob.indexOf('T');
+				tempData.dod = tempData.dod.substr(0, tempdata.dod.indexOf('T');
+				console.log(tempData);
 			}
 
 			this.setState({

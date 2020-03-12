@@ -97,7 +97,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                     okText={okayText}
                     onCancel={onCancel}
                     onOk={onCreate}
-                    width={450}
+                    width={440}
                 >
                     <Form layout="vertical">
                         <Form.Item label="Book Title" style={{ marginBottom: "0px" }}>

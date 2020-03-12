@@ -59,7 +59,7 @@ const AddAuthorForm = Form.create({ name: 'add-author-form' })(    // Don't forg
                     okText={okayText}
                     onCancel={onCancel}
                     onOk={onCreate}
-                    width={450}
+                    width={400}
                 >
                     <Form layout="vertical">
                         <Form.Item label="Name" style={{ marginBottom: "0px" }}>

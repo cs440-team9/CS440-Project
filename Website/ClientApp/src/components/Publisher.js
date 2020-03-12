@@ -52,7 +52,7 @@ const AddPublisherForm = Form.create({ name: 'add-publisher-form' })(    // Don'
                     okText={okayText}
                     onCancel={onCancel}
                     onOk={onCreate}
-                    width={450}
+                    width={400}
                 >
                     <Form layout="vertical">
                         <Form.Item label="Publisher Name" style={{ marginBottom: "0px" }}>

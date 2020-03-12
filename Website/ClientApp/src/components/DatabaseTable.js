@@ -1,5 +1,4 @@
 ﻿import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Button, Icon, Input, Table, Spin } from 'antd';
 import moment from 'moment';
 import Highlighter from 'react-highlight-words';
@@ -121,7 +120,7 @@ export default class DatabaseTable extends Component {
 
     componentDidUpdate(prevProps) {
 		if (prevProps.dataSource !== this.props.dataSource) {
-			if (this.props.columns == "AuthorTableColumns") {
+			if (this.props.columns === "AuthorTableColumns") {
 				var tempData = this.props.dataSource;
 
 				for (let i = 0; i < tempData.length; i++) {

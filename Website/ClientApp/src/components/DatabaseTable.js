@@ -126,14 +126,6 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		console.log(this.props.dataSource);
-		/*
-		if (typeof this.props.dataSource.dob !== 'undefined') {
-			this.props.dataSource.dob = moment(this.props.dataSource.dob).format('LL');
-			this.props.dataSource.dob = moment(this.props.dataSource.dod).format('LL');
-		}
-		*/
-
         this.state = {
             tableData: this.props.dataSource,
 			selectedRowKeys: [],
@@ -145,7 +137,10 @@ export default class DatabaseTable extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.dataSource !== this.props.dataSource) {
-			console.log(this.props.dataSource);
+			if (typeof this.props.dataSource.dob !== 'undefined') {
+				this.props.dataSource.dob = moment(this.props.dataSource.dob).format('LL');
+				this.props.dataSource.dob = moment(this.props.dataSource.dod).format('LL');
+			}
 
 			this.setState({
                 tableData: this.props.dataSource,

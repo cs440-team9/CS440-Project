@@ -126,6 +126,11 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
+		if (this.props.dataSource.dob !== 'undefined') {
+			this.props.dataSource.dob = moment(this.props.dataSource.dob).format('LL');
+			this.props.dataSource.dob = moment(this.props.dataSource.dod).format('LL');
+		}
+
         this.state = {
             tableData: this.props.dataSource,
 			selectedRowKeys: [],
@@ -235,19 +240,6 @@ export default class DatabaseTable extends Component {
 		if (tableData !== null) {
 			console.log(tableData);
 			console.log(moment(tableData.dob).format('LL'));
-		}
-
-		this.columns = null;
-		switch (this.props.columns) {
-			case "BookTableColumns":
-				//this.columns = BookTableColumns;
-				break;
-			case "AuthorTableColumns":
-				//this.columns = AuthorTableColumns;
-				break;
-			case "PublisherTableColumns":
-				//this.columns = PublisherTableColumns;
-				break;
 		}
 
         return (

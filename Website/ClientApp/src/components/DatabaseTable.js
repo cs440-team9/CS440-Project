@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button, Icon, Table, Spin } from 'antd';
+import { Button, Icon, Input, Table, Spin } from 'antd';
 import moment from 'moment';
 import Highlighter from 'react-highlight-words';
 

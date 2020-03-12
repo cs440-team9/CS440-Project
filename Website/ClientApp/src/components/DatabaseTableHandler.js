@@ -67,7 +67,6 @@ export default class DatabaseTableHandler extends Component {
 
 				// Run through all datapoints in the table, replacing ID with associated name
 				for (let i = 0; i < tableDataCopy.length; i++) {
-					console.log(tableDataCopy[i][type + 'ID']);
 					if (tableDataCopy[i][type + 'ID'] !== null) {
 						//var ID = parseInt(tableDataCopy[i][type + 'ID']);
 						var ID = tableDataCopy[i][type + 'ID'];

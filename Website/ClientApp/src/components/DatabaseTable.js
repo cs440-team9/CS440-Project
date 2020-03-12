@@ -132,7 +132,7 @@ export default class DatabaseTable extends Component {
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
 		}
 
-		this.BookTableColumns = [
+		const BookTableColumns = [
 			{
 				title: 'ISBN',
 				dataIndex: 'ISBN',
@@ -174,7 +174,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		this.AuthorTableColumns = [
+		const AuthorTableColumns = [
 			{
 				title: 'Author ID',
 				dataIndex: 'authorID',
@@ -208,7 +208,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		this.PublisherTableColumns = [
+		const PublisherTableColumns = [
 			{
 				title: 'Publisher ID',
 				dataIndex: 'publisherID',
@@ -253,7 +253,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={this[this.props.columns]}
+                        columns={eval(this.props.columns)}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

@@ -227,7 +227,7 @@ export default class DatabaseTable extends Component {
 		];
 
 		var cols = null;
-		switch (this.columns) {
+		switch (this.props.columns) {
 			case "BookTableColumns":
 				cols = BookTableColumns;
 				break;
@@ -238,9 +238,6 @@ export default class DatabaseTable extends Component {
 				cols = PublisherTableColumns;
 				break;
 		}
-
-		console.log(this.columns);
-		console.log(this.cols);
 
         return (
             <Fragment>

@@ -158,20 +158,20 @@ export default class DatabaseTable extends Component {
 					style={{ width: 90, marginRight: 8 }}
 				>
 					Search
-				</Button>
+        </Button>
 				<Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
 					Reset
-				</Button>
+        </Button>
 			</div>
 		),
 		filterIcon: filtered => (
 			<Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
 		),
-		onFilter: (value, record) => {
+		onFilter: (value, record) =>
 			record[dataIndex]
 				.toString()
 				.toLowerCase()
-				.includes(value.toLowerCase())},
+				.includes(value.toLowerCase()),
 		onFilterDropdownVisibleChange: visible => {
 			if (visible) {
 				setTimeout(() => this.searchInput.select());

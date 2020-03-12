@@ -61,23 +61,25 @@ export default class DatabaseTableHandler extends Component {
 			}
 		}).then(async (res) => {
 			res.json().then(async (data) => {
-				// Copy this.state.tableData into a new array.
-				var tableDataCopy = [...this.state.tableData];
-				var newData = "";
+				setTimeout(() => {
+					// Copy this.state.tableData into a new array.
+					var tableDataCopy = [...this.state.tableData];
+					var newData = "";
 
-				// Run through all datapoints in the table, replacing ID with associated name
-				for (let i = 0; i < tableDataCopy.length; i++) {
-					if (tableDataCopy[i][type + 'ID'] !== null) {
-						//var ID = parseInt(tableDataCopy[i][type + 'ID']);
-						var ID = tableDataCopy[i][type + 'ID'];
+					// Run through all datapoints in the table, replacing ID with associated name
+					for (let i = 0; i < tableDataCopy.length; i++) {
+						if (tableDataCopy[i][type + 'ID'] !== null) {
+							//var ID = parseInt(tableDataCopy[i][type + 'ID']);
+							var ID = tableDataCopy[i][type + 'ID'];
 
-						newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
+							newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
 
-						tableDataCopy[i][type + 'ID'] = newData;
+							tableDataCopy[i][type + 'ID'] = newData;
+						}
 					}
-				}
 
-				this.setState({ tableData: tableDataCopy });
+					this.setState({ tableData: tableDataCopy });
+				}, 1000);
 			});
 		}).catch(err => err);
 	}

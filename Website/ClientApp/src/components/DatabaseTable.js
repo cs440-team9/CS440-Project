@@ -226,6 +226,9 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
+		console.log(this.state.searchedColumn);
+		console.log(this.state.searchText);
+
         return (
             <Fragment>
                 <div style={{ maxWidth: tableWidth }}>

@@ -137,13 +137,45 @@ export default class DatabaseTable extends Component {
 
     componentDidUpdate(prevProps) {
 		if (prevProps.dataSource !== this.props.dataSource) {
-			console.log("in it");
-			console.log(this.props.dataSource);
-			this.setState({
-                tableData: this.props.dataSource,
-                selectedRowKeys: []
-            });
+
+			if (this.props.columns == "BookTableColumns") {
+				var tempData = this.props.dataSource;
+				for (let i = 0; i < tempData.length; i++) {
+					if (tempData[i].dob !== null)
+						tempData[i].dob = tempData[i].dob.substr(0, tempData[i].dob.indexOf('T'));
+					if (tempData[i].dod !== null)
+						tempData[i].dod = tempData[i].dod.substr(0, tempData[i].dod.indexOf('T'));
+				}
+
+				this.setState({
+					tableData: tempData,
+					selectedRowKeys: []
+				});
+			} else {
+				this.setState({
+					tableData: this.props.dataSource,
+					selectedRowKeys: []
+				});
+			}
         }
+	}
+
+	componentDidMount = () => {
+		console.log(this.props.dataSource);
+
+		var tempData = this.props.dataSource;
+		if (typeof this.props.dataSource.dob !== 'undefined') {
+			console.log("in it");
+			console.log(tempData);
+			tempData.dob = tempData.dob.substr(0, tempData.dob.indexOf('T'));
+			tempData.dod = tempData.dod.substr(0, tempData.dod.indexOf('T'));
+			console.log(tempData);
+		}
+
+		this.setState({
+			tableData: tempData,
+			selectedRowKeys: []
+		});
 	}
 
 	getColumnSearchProps = dataIndex => ({

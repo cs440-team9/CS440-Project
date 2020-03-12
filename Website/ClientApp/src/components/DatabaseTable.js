@@ -265,8 +265,8 @@ export default class DatabaseTable extends Component {
                         locale={{ emptyText: <div style={{ height: 120 }} /> }}
                         loading={loading}
                         rowKey={rowKey}
-                        rowSelection={rowSelection}
-                        columns={cols}
+						rowSelection={rowSelection}
+						columns={BookTableColumns}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

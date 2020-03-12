@@ -206,9 +206,10 @@ export default class DatabaseTable extends Component {
 				sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
 				render: text => {
 					if (text === null)
-						return '';
+						return 'test';
 					else
-						return moment(text).format('MMMM Do YYYY');
+						return text.substr(0, text.indexOf('T'));
+						//return moment(text).format('MMMM Do YYYY');
 				},
 				...this.getColumnSearchProps('dod'),
 			},

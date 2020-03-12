@@ -117,7 +117,7 @@ export default class DatabaseTable extends Component {
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
 		}
 
-		const BookTableColumns = [
+		var BookTableColumns = [
 			{
 				title: 'ISBN',
 				dataIndex: 'ISBN',
@@ -168,7 +168,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		const AuthorTableColumns = [
+		var AuthorTableColumns = [
 			{
 				title: 'Author ID',
 				dataIndex: 'authorID',
@@ -194,7 +194,7 @@ export default class DatabaseTable extends Component {
 					if (text === null)
 						return '';
 					else
-						return moment(text).format('MMMM Do YYYY');
+						return moment(text).format('LL');
 				},
 				...this.getColumnSearchProps('dob'),
 			},
@@ -208,14 +208,13 @@ export default class DatabaseTable extends Component {
 					if (text === null)
 						return 'test';
 					else
-						return text.substr(0, text.indexOf('T'));
-						//return moment(text).format('MMMM Do YYYY');
+						return moment(text).format('LL');
 				},
 				...this.getColumnSearchProps('dod'),
 			},
 		];
 
-		const PublisherTableColumns = [
+		var PublisherTableColumns = [
 			{
 				title: 'Publisher ID',
 				dataIndex: 'publisherID',
@@ -233,6 +232,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
+		/*
 		var columns = null;
 		switch (this.props.columns) {
 			case "BookTableColumns":
@@ -245,6 +245,7 @@ export default class DatabaseTable extends Component {
 				columns = PublisherTableColumns;
 				break;
 		}
+		*/
 
         return (
             <Fragment>
@@ -273,7 +274,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={columns}
+                        columns={eval(this.props.columns)}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

@@ -37,17 +37,17 @@ export default class DatabaseTableHandler extends Component {
 		/* Set information about table, including what columns to use, the table's
 		 * width, and what key to use at the row's unique identifier. */
         if (pageType === 'Book') {
-            this.columns = BookTableColumns;
+            this.columns = "BookTableColumns";
             this.tableWidth = 1500;
             this.rowKey = "ISBN";
         }
         else if (pageType === 'Author') {
-            this.columns = AuthorTableColumns;
+            this.columns = "AuthorTableColumns";
             this.tableWidth = 850;
             this.rowKey = "authorID";
         }
         else if (pageType === 'Publisher') {
-            this.columns = PublisherTableColumns;
+            this.columns = "PublisherTableColumns";
             this.tableWidth = 600;
             this.rowKey = "publisherID";
         }

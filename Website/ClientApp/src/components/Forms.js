@@ -1,5 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Button, Icon } from 'antd';
+import moment from 'moment';
 
 import { AddBookForm } from './Book';
 import { AddAuthorForm } from './Author';
@@ -55,7 +56,9 @@ export default class FormHandler extends Component {
                 return;
 			}
 
-			console.log("Received form values: ", values);
+			/* Need to remove everything from year_published that isn't the year. */
+			if (typeof values.year_published !== 'undefined')
+				values.year_published = moment(values.year_published).format('YYYY');
 
             if (this.state.editing)
                 this.props.formCallback(values, this.state.selectedRowKeys[0]);

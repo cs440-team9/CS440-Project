@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const { Option } = Select;
 
-const dateFormat = 'YYYY/MM/DD';
+const dateFormat = 'YYYY';
 
 const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget to change the names here
     class extends Component {
@@ -93,7 +93,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
             return (
                 <Modal
                     visible={visible}
-                    title={okayText + " Author"}
+                    title={okayText + " Book"}
                     okText={okayText}
                     onCancel={onCancel}
                     onOk={onCreate}
@@ -142,7 +142,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 
 						<Form.Item label="Year Published" style={{ marginBottom: "0px" }}>
 							{getFieldDecorator('year_published', {
-								initialValue: formData.year_published == null ? null : moment(formData.year_published),
+								initialValue: formData.year_published == null ? null : moment(formData.year_published).format('YYYY'),
 							})(<DatePicker format={dateFormat} />)}
 						</Form.Item>
                     </Form>

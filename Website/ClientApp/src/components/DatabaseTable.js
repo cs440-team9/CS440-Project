@@ -192,7 +192,7 @@ export default class DatabaseTable extends Component {
 			) : (
 					text
 				),
-		}
+		},
 	});
 
 	handleSearch = (selectedKeys, confirm, dataIndex) => {

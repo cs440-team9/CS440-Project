@@ -174,13 +174,10 @@ export default class DatabaseTable extends Component {
 			<Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
 		),
 		onFilter: (value, record) => {
-			if (record[dataIndex] !== null) {
-				record[dataIndex]
-					.toString()
-					.toLowerCase()
-					.includes(value.toLowerCase())
-			}
-		},
+			record[dataIndex]
+				.toString()
+				.toLowerCase()
+				.includes(value.toLowerCase())},
 		onFilterDropdownVisibleChange: visible => {
 			if (visible) {
 				setTimeout(() => this.searchInput.select());

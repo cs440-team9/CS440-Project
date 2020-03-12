@@ -232,20 +232,18 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		/*
-		var columns = null;
+		this.columns = null;
 		switch (this.props.columns) {
 			case "BookTableColumns":
 				columns = BookTableColumns;
 				break;
 			case "AuthorTableColumns":
-				columns = AuthorTableColumns;
+				this.columns = AuthorTableColumns;
 				break;
 			case "PublisherTableColumns":
-				columns = PublisherTableColumns;
+				this.columns = PublisherTableColumns;
 				break;
 		}
-		*/
 
         return (
             <Fragment>
@@ -274,7 +272,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={eval(this.props.columns)}
+                        columns={BookTableColumns}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

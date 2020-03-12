@@ -191,7 +191,7 @@ export default class DatabaseTable extends Component {
 				/>
 			) : (
 					text
-				),
+				);
 		},
 	});
 

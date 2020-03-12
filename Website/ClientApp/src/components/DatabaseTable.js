@@ -233,6 +233,8 @@ export default class DatabaseTable extends Component {
 		}
 
 		console.log(tableData);
+		console.log(moment(tableData.dob).format('LL'));
+
 		this.columns = null;
 		switch (this.props.columns) {
 			case "BookTableColumns":

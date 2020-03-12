@@ -64,10 +64,10 @@ export default class DatabaseTable extends Component {
 					style={{ width: 90, marginRight: 8 }}
 				>
 					Search
-        </Button>
+				</Button>
 				<Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
 					Reset
-        </Button>
+				</Button>
 			</div>
 		),
 		filterIcon: filtered => (
@@ -147,12 +147,6 @@ export default class DatabaseTable extends Component {
 				key: 'year_published',
 				width: 200,
 				sorter: (a, b) => a.year_published - b.year_published,
-				render: text => {
-					if (text === null)
-						return '';
-					else
-						return moment(text).format('YYYY');
-				},
 				...this.getColumnSearchProps('year_published'),
 			},
 			{

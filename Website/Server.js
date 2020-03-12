@@ -34,7 +34,7 @@ app.get('/get_table/:tableID', function (req, res, next) {
 
 /***************** INSERT functions *****************/
 
-// Add a row to ex_book_test
+// Add a row to ex_book
 app.post('/add_to_book', function (req, res, next) {
 	var ISBN = req.body.ISBN;
 	var year_published = null;
@@ -45,7 +45,7 @@ app.post('/add_to_book', function (req, res, next) {
 	if (req.body.year_published !== null)
 		year_published = req.body.year_published;
 
-	var query = `INSERT INTO ex_book_test
+	var query = `INSERT INTO ex_book
 				(
 					ISBN, year_published, title, authorID, publisherID
 				)
@@ -60,11 +60,11 @@ app.post('/add_to_book', function (req, res, next) {
 			return;
 		}
 
-		res.json({ msg: 'Successfully inserted row into ex_book_test.' });
+		res.json({ msg: 'Successfully inserted row into ex_book.' });
 	});
 });
 
-// Add a row to ex_author_test
+// Add a row to ex_author
 app.post('/add_to_author', function (req, res, next) {
 	var name = req.body.name;
 	var dob = null;
@@ -76,7 +76,7 @@ app.post('/add_to_author', function (req, res, next) {
 	if (req.body.dod !== null)
 		dod = req.body.dod;
 
-	var query = `INSERT INTO ex_author_test
+	var query = `INSERT INTO ex_author
 				(
 					name, dob, dod
 				)
@@ -91,7 +91,7 @@ app.post('/add_to_author', function (req, res, next) {
 			return;
 		}
 
-		res.json({ msg: 'Successfully inserted row into ex_author_test.' });
+		res.json({ msg: 'Successfully inserted row into ex_author.' });
 	});
 });
 
@@ -122,7 +122,7 @@ app.post('/add_to_publisher', function (req, res, next) {
 
 /***************** UPDATE functions *****************/
 
-// Update a row in ex_book_test based on the ISBN in the body
+// Update a row in ex_book based on the ISBN in the body
 app.put('/update_book', function (req, res, next) {
 	var ISBN = req.body.ISBN;
 	var year_published = null;
@@ -133,7 +133,7 @@ app.put('/update_book', function (req, res, next) {
 	if (req.body.year_published !== null)
 		year_published = req.body.year_published;
 
-	var query = `UPDATE ex_book_test
+	var query = `UPDATE ex_book
 				SET ISBN = ?, year_published = ?, title = ?, authorID = ?, publisherID = ?
 				WHERE ISBN = ?`;
 
@@ -147,7 +147,7 @@ app.put('/update_book', function (req, res, next) {
 	});
 });
 
-// Update a row in ex_author_test based on the authorID in the body
+// Update a row in ex_author based on the authorID in the body
 app.put('/update_author', function (req, res, next) {
 	var authorID = req.body.authorID;
 	var name = req.body.name;
@@ -160,7 +160,7 @@ app.put('/update_author', function (req, res, next) {
 	if (req.body.dod !== null)
 		dod = req.body.dod;
 
-	var query = `UPDATE ex_author_test
+	var query = `UPDATE ex_author
 				SET name = ?, dob = ?, dod = ?
 				WHERE authorID = ?`;
 
@@ -197,11 +197,11 @@ app.put('/update_publisher', function (req, res, next) {
 
 /***************** DELETE functions *****************/
 
-// Delete a row from ex_book_test based on the ISBN in the body
+// Delete a row from ex_book based on the ISBN in the body
 app.delete('/delete_book', function (req, res, next) {
 	var ISBN = req.body.ISBN;
 
-	var query = `DELETE FROM ex_book_test
+	var query = `DELETE FROM ex_book
 				WHERE ISBN = ?`;
 
 	mysql.pool.query(query, [ISBN], function (err, rows, fields) {
@@ -210,17 +210,17 @@ app.delete('/delete_book', function (req, res, next) {
 			return;
 		}
 
-		res.json({ msg: 'Successfully deleted row ' + ISBN + ' from ex_book_test' });
+		res.json({ msg: 'Successfully deleted row ' + ISBN + ' from ex_book' });
 	});
 });
 
-// Delete a row from ex_author_test based on the authorID in the body
+// Delete a row from ex_author based on the authorID in the body
 app.delete('/delete_author', function (req, res, next) {
 	var authorID = req.body.authorID;
 
-	/* Can't delete an author that's in use in ex_book_test.
-	 * Must delete any entry in ex_book_test using said author first. */
-	var query1 = `DELETE FROM ex_book_test
+	/* Can't delete an author that's in use in ex_book.
+	 * Must delete any entry in ex_book using said author first. */
+	var query1 = `DELETE FROM ex_book
 				WHERE authorID = ?`;
 
 	mysql.pool.query(query1, [authorID], function (err, rows, fields) {
@@ -232,8 +232,8 @@ app.delete('/delete_author', function (req, res, next) {
 
 	// Wait for one second to ensure that delete happened, to avoid foreign key constraint
 	setTimeout(function () {
-		// Now that foreign key constraints are deleted, delete from ex_author_test
-		var query2 = `DELETE FROM ex_author_test
+		// Now that foreign key constraints are deleted, delete from ex_author
+		var query2 = `DELETE FROM ex_author
 					WHERE authorID = ?`;
 
 		mysql.pool.query(query2, [authorID], function (err, rows, fields) {
@@ -242,7 +242,7 @@ app.delete('/delete_author', function (req, res, next) {
 				return;
 			}
 
-			res.json({ msg: 'Successfully deleted rows in ex_book_test with authorID ' + authorID + '. Successfully deleted row ' + authorID + ' from ex_author_test' });
+			res.json({ msg: 'Successfully deleted rows in ex_book with authorID ' + authorID + '. Successfully deleted row ' + authorID + ' from ex_author' });
 		});
 	}, 1000);
 });
@@ -251,9 +251,9 @@ app.delete('/delete_author', function (req, res, next) {
 app.delete('/delete_publisher', function (req, res, next) {
 	var publisherID = req.body.publisherID;
 
-	/* Can't delete a publisher that's in use in ex_book_test.
-	 * Must delete any entry in ex_book_test using said publisher first. */
-	var query1 = `DELETE FROM ex_book_test
+	/* Can't delete a publisher that's in use in ex_book.
+	 * Must delete any entry in ex_book using said publisher first. */
+	var query1 = `DELETE FROM ex_book
 				WHERE publisherID = ?`;
 
 	mysql.pool.query(query1, [publisherID], function (err, rows, fields) {
@@ -275,7 +275,7 @@ app.delete('/delete_publisher', function (req, res, next) {
 				return;
 			}
 
-			res.json({ msg: 'Successfully deleted rows in ex_book_test with publisherID ' + publisherID + '. Successfully deleted row ' + publisherID + ' from ex_publisher' });
+			res.json({ msg: 'Successfully deleted rows in ex_book with publisherID ' + publisherID + '. Successfully deleted row ' + publisherID + ' from ex_publisher' });
 		});
 	}, 1000);	
 });

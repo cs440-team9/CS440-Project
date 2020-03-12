@@ -54,7 +54,7 @@ export default class DatabaseTableHandler extends Component {
 
 	replaceIDs = async (type) => {
 		// Replace all instances of ID with the associated name
-		await fetch(serverURL + "get_table/ex_" + type + "_test", {
+		await fetch(serverURL + "get_table/ex_" + type, {
 			method: "GET",
 			headers: {
 				"Accept": "application/json"
@@ -91,7 +91,7 @@ export default class DatabaseTableHandler extends Component {
         pageType = pageType.replace(/ /g, "_").toLowerCase();
 
         // Only fetches the current table instead of all of them
-        await fetch(serverURL + "get_table/ex_" + pageType + "_test", {
+        await fetch(serverURL + "get_table/ex_" + pageType, {
             method: "GET",
             headers: {
                 "Accept": "application/json"

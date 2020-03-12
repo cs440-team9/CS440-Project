@@ -63,7 +63,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 
         getTable = (tableName) => {
             // Fetch the table to get values for select component
-            fetch(serverURL + "get_table/ex_" + tableName + "_test", {
+            fetch(serverURL + "get_table/ex_" + tableName, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json"

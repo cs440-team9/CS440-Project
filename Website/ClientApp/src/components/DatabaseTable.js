@@ -232,8 +232,10 @@ export default class DatabaseTable extends Component {
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
 		}
 
-		console.log(tableData);
-		console.log(moment(tableData.dob).format('LL'));
+		if (tableData !== null) {
+			console.log(tableData);
+			console.log(moment(tableData.dob).format('LL'));
+		}
 
 		this.columns = null;
 		switch (this.props.columns) {

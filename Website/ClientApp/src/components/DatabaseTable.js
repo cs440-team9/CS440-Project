@@ -11,23 +11,9 @@ export default class DatabaseTable extends Component {
     constructor(props) {
         super(props);
 
-		var columns = null;
-		switch (this.props.columns) {
-			case "BookTableColumns":
-				columns = BookTableColumns;
-				break;
-			case "AuthorTableColumns":
-				columns = AuthorTableColumns;
-				break;
-			case "PublisherTableColumns":
-				columns = PublisherTableColumns;
-				break;
-		}
-
         this.state = {
             tableData: this.props.dataSource,
 			selectedRowKeys: [],
-			selectedColumns: columns,
 			searchText: '',
 			searchedColumn: '',
         };
@@ -129,7 +115,135 @@ export default class DatabaseTable extends Component {
         const loading = {
             spinning: tableLoading,
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
-        }
+		}
+
+		const BookTableColumns = [
+			{
+				title: 'ISBN',
+				dataIndex: 'ISBN',
+				key: 'ISBN',
+				width: 175,
+				sorter: (a, b) => a.ISBN - b.ISBN,
+				render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
+				...this.getColumnSearchProps('ISBN'),
+			},
+			{
+				title: 'Year Published',
+				dataIndex: 'year_published',
+				key: 'year_published',
+				width: 200,
+				sorter: (a, b) => moment(a.year_published).unix() - moment(b.year_published).unix(),
+				render: text => {
+					if (text === null)
+						return '';
+					else
+						return moment(text).format('YYYY');
+				},
+				...this.getColumnSearchProps('year_published'),
+			},
+			{
+				title: 'Title',
+				dataIndex: 'title',
+				key: 'title',
+				sorter: (a, b) => { return a.title.localeCompare(b.title) },
+				...this.getColumnSearchProps('title'),
+			},
+			{
+				title: 'Author ID',
+				dataIndex: 'authorID',
+				key: 'authorID',
+				width: 250,
+				sorter: (a, b) => { return a.authorID.localeCompare(b.authorID) },
+				render: (text, record) => <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link>,
+				...this.getColumnSearchProps('authorID'),
+			},
+			{
+				title: 'Publisher ID',
+				dataIndex: 'publisherID',
+				key: 'publisherID',
+				width: 250,
+				sorter: (a, b) => { return a.publisherID.localeCompare(b.publisherID) },
+				render: (text, record) => <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link>,
+				...this.getColumnSearchProps('publisherID'),
+			},
+		];
+
+		const AuthorTableColumns = [
+			{
+				title: 'Author ID',
+				dataIndex: 'authorID',
+				key: 'authorID',
+				sorter: (a, b) => a.authorID - b.authorID,
+				...this.getColumnSearchProps('authorID'),
+			},
+			{
+				title: 'Name',
+				dataIndex: 'name',
+				key: 'name',
+				width: 250,
+				sorter: (a, b) => { return a.name.localeCompare(b.name) },
+				...this.getColumnSearchProps('name'),
+			},
+			{
+				title: 'Date of Birth',
+				dataIndex: 'dob',
+				key: 'dob',
+				width: 200,
+				sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
+				render: text => {
+					if (text === null)
+						return '';
+					else
+						return moment(text).format('LL');
+				},
+				...this.getColumnSearchProps('dob'),
+			},
+			{
+				title: 'Date of Death',
+				dataIndex: 'dod',
+				key: 'dod',
+				width: 200,
+				sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
+				render: text => {
+					if (text === null)
+						return '';
+					else
+						return moment(text).format('LL');
+				},
+				...this.getColumnSearchProps('dod'),
+			},
+		];
+
+		const PublisherTableColumns = [
+			{
+				title: 'Publisher ID',
+				dataIndex: 'publisherID',
+				key: 'publisherID',
+				width: 125,
+				sorter: (a, b) => a.publisherID - b.publisherID,
+				...this.getColumnSearchProps('publisherID'),
+			},
+			{
+				title: 'Name',
+				dataIndex: 'name',
+				key: 'name',
+				sorter: (a, b) => { return a.name.localeCompare(b.name) },
+				...this.getColumnSearchProps('name'),
+			},
+		];
+
+		var columns = null;
+		switch (this.props.columns) {
+			case "BookTableColumns":
+				columns = BookTableColumns;
+				break;
+			case "AuthorTableColumns":
+				columns = AuthorTableColumns;
+				break;
+			case "PublisherTableColumns":
+				columns = PublisherTableColumns;
+				break;
+		}
 
         return (
             <Fragment>
@@ -169,118 +283,3 @@ export default class DatabaseTable extends Component {
         );
     }
 }
-
-const BookTableColumns = [
-	{
-		title: 'ISBN',
-		dataIndex: 'ISBN',
-		key: 'ISBN',
-		width: 175,
-		sorter: (a, b) => a.ISBN - b.ISBN,
-		render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
-		...this.getColumnSearchProps('ISBN'),
-	},
-	{
-		title: 'Year Published',
-		dataIndex: 'year_published',
-		key: 'year_published',
-		width: 200,
-		sorter: (a, b) => moment(a.year_published).unix() - moment(b.year_published).unix(),
-		render: text => {
-			if (text === null)
-				return '';
-			else
-				return moment(text).format('YYYY');
-		},
-		...this.getColumnSearchProps('year_published'),
-	},
-	{
-		title: 'Title',
-		dataIndex: 'title',
-		key: 'title',
-		sorter: (a, b) => { return a.title.localeCompare(b.title) },
-		...this.getColumnSearchProps('title'),
-	},
-	{
-		title: 'Author ID',
-		dataIndex: 'authorID',
-		key: 'authorID',
-		width: 250,
-		sorter: (a, b) => { return a.authorID.localeCompare(b.authorID) },
-		render: (text, record) => <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link>,
-		...this.getColumnSearchProps('authorID'),
-	},
-	{
-		title: 'Publisher ID',
-		dataIndex: 'publisherID',
-		key: 'publisherID',
-		width: 250,
-		sorter: (a, b) => { return a.publisherID.localeCompare(b.publisherID) },
-		render: (text, record) => <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link>,
-		...this.getColumnSearchProps('publisherID'),
-	},
-];
-
-const AuthorTableColumns = [
-	{
-		title: 'Author ID',
-		dataIndex: 'authorID',
-		key: 'authorID',
-		sorter: (a, b) => a.authorID - b.authorID,
-		...this.getColumnSearchProps('authorID'),
-	},
-	{
-		title: 'Name',
-		dataIndex: 'name',
-		key: 'name',
-		width: 250,
-		sorter: (a, b) => { return a.name.localeCompare(b.name) },
-		...this.getColumnSearchProps('name'),
-	},
-	{
-		title: 'Date of Birth',
-		dataIndex: 'dob',
-		key: 'dob',
-		width: 200,
-		sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
-		render: text => {
-			if (text === null)
-				return '';
-			else
-				return moment(text).format('LL');
-		},
-		...this.getColumnSearchProps('dob'),
-	},
-	{
-		title: 'Date of Death',
-		dataIndex: 'dod',
-		key: 'dod',
-		width: 200,
-		sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
-		render: text => {
-			if (text === null)
-				return '';
-			else
-				return moment(text).format('LL');
-		},
-		...this.getColumnSearchProps('dod'),
-	},
-];
-
-const PublisherTableColumns = [
-	{
-		title: 'Publisher ID',
-		dataIndex: 'publisherID',
-		key: 'publisherID',
-		width: 125,
-		sorter: (a, b) => a.publisherID - b.publisherID,
-		...this.getColumnSearchProps('publisherID'),
-	},
-	{
-		title: 'Name',
-		dataIndex: 'name',
-		key: 'name',
-		sorter: (a, b) => { return a.name.localeCompare(b.name) },
-		...this.getColumnSearchProps('name'),
-	},
-];

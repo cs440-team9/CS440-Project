@@ -231,7 +231,7 @@ export default class DatabaseTable extends Component {
             spinning: tableLoading,
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
 		}
-
+		console.log(tableData);
         return (
             <Fragment>
                 <div style={{ maxWidth: tableWidth }}>

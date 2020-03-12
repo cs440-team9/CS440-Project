@@ -194,7 +194,7 @@ export default class DatabaseTable extends Component {
 					if (text === null)
 						return '';
 					else
-						return moment(text).format('LL');
+						return moment(text).format('MM/DD/YYYY');
 				},
 				...this.getColumnSearchProps('dob'),
 			},
@@ -208,7 +208,7 @@ export default class DatabaseTable extends Component {
 					if (text === null)
 						return '';
 					else
-						return moment(text).format('LL');
+						return moment(text).format('MM/DD/YYYY');
 				},
 				...this.getColumnSearchProps('dod'),
 			},

@@ -2,12 +2,6 @@
 import DatabaseTable from './DatabaseTable';
 import { serverURL } from '../App';
 
-import {
-    BookTableColumns,
-    AuthorTableColumns,
-    PublisherTableColumns,
-} from './TableColumns';
-
 function toTitleCase(str) {
     if (typeof str === "undefined" || str === null) {
         return "";

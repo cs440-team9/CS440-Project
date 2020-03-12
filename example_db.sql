@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `ex_book`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ex_book` (
   `ISBN` bigint NOT NULL,
-  `year_published` date DEFAULT NULL,
+  `year_published` year DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `authorID` int(10) NOT NULL,
   `publisherID` int(10) NOT NULL,

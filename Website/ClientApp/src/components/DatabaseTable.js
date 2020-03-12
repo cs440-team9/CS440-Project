@@ -239,6 +239,9 @@ export default class DatabaseTable extends Component {
 				break;
 		}
 
+		console.log(this.columns);
+		console.log(this.cols);
+
         return (
             <Fragment>
                 <div style={{ maxWidth: tableWidth }}>

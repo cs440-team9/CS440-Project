@@ -11,7 +11,7 @@ export default class DatabaseTable extends Component {
     constructor(props) {
         super(props);
 
-		const BookTableColumns = [
+		this.BookTableColumns = [
 			{
 				title: 'ISBN',
 				dataIndex: 'ISBN',
@@ -62,7 +62,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		const AuthorTableColumns = [
+		this.AuthorTableColumns = [
 			{
 				title: 'Author ID',
 				dataIndex: 'authorID',
@@ -108,7 +108,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		const PublisherTableColumns = [
+		this.PublisherTableColumns = [
 			{
 				title: 'Publisher ID',
 				dataIndex: 'publisherID',
@@ -235,13 +235,13 @@ export default class DatabaseTable extends Component {
 		this.columns = null;
 		switch (this.props.columns) {
 			case "BookTableColumns":
-				this.columns = BookTableColumns;
+				//this.columns = BookTableColumns;
 				break;
 			case "AuthorTableColumns":
-				this.columns = AuthorTableColumns;
+				//this.columns = AuthorTableColumns;
 				break;
 			case "PublisherTableColumns":
-				this.columns = PublisherTableColumns;
+				//this.columns = PublisherTableColumns;
 				break;
 		}
 
@@ -272,7 +272,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={eval(this.props.columns)}
+                        columns={this[this.props.columns]}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

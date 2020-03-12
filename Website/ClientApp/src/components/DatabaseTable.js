@@ -235,7 +235,7 @@ export default class DatabaseTable extends Component {
 		this.columns = null;
 		switch (this.props.columns) {
 			case "BookTableColumns":
-				columns = BookTableColumns;
+				this.columns = BookTableColumns;
 				break;
 			case "AuthorTableColumns":
 				this.columns = AuthorTableColumns;

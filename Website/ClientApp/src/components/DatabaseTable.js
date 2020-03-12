@@ -137,7 +137,7 @@ export default class DatabaseTable extends Component {
 
     componentDidUpdate(prevProps) {
 		if (prevProps.dataSource !== this.props.dataSource) {
-			var tempData = [...this.props.dataSource];
+			var tempData = this.props.dataSource;
 			if (typeof this.props.dataSource.dob !== 'undefined') {
 				console.log("in it");
 				console.log(tempData);
@@ -156,7 +156,7 @@ export default class DatabaseTable extends Component {
 	componentDidMount = () => {
 		console.log(this.props.dataSource);
 
-		var tempData = [...this.props.dataSource];
+		var tempData = this.props.dataSource;
 		if (typeof this.props.dataSource.dob !== 'undefined') {
 			console.log("in it");
 			console.log(tempData);

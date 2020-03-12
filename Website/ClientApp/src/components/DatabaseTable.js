@@ -132,7 +132,7 @@ export default class DatabaseTable extends Component {
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
 		}
 
-		const BookTableColumns = [
+		var BookTableColumns = [
 			{
 				title: 'ISBN',
 				dataIndex: 'ISBN',
@@ -174,7 +174,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		const AuthorTableColumns = [
+		var AuthorTableColumns = [
 			{
 				title: 'Author ID',
 				dataIndex: 'authorID',
@@ -208,7 +208,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		const PublisherTableColumns = [
+		var PublisherTableColumns = [
 			{
 				title: 'Publisher ID',
 				dataIndex: 'publisherID',
@@ -226,8 +226,18 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		console.log(this.state.searchedColumn);
-		console.log(this.state.searchText);
+		var cols = null;
+		switch (this.columns) {
+			case "BookTableColumns":
+				cols = BookTableColumns;
+				break;
+			case "AuthorTableColumns":
+				cols = AuthorTableColumns;
+				break;
+			case "PublisherTableColumns":
+				cols = PublisherTableColumns;
+				break;
+		}
 
         return (
             <Fragment>
@@ -256,7 +266,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={eval(this.props.columns)}
+                        columns={cols}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

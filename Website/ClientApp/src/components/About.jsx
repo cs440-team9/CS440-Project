@@ -7,7 +7,9 @@ export class About extends Component {
 				<h1>About</h1>
 				<br />
 				<p>
-					Blah blah blah...
+					This is a library catalog containing books, journals, periodicals, and other kinds of written works.
+					Librarians and library members can view, add, edit, or delete publications.
+					They can also view and add authors and publishers.
 				</p>
 			</div>
 		);

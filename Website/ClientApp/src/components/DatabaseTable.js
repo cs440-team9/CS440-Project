@@ -104,8 +104,8 @@ export default class DatabaseTable extends Component {
     };
 
     render() {
-        var { selectedRowKeys, tableData, selectedColumns } = this.state;
-        const { columns, formHandlerType, tableLoading, tableWidth, rowKey } = this.props;
+        var { selectedRowKeys, tableData } = this.state;
+        const { formHandlerType, tableLoading, tableWidth, rowKey } = this.props;
 
         const rowSelection = {
             selectedRowKeys,
@@ -272,7 +272,7 @@ export default class DatabaseTable extends Component {
                         loading={loading}
                         rowKey={rowKey}
                         rowSelection={rowSelection}
-                        columns={selectedColumns}
+                        columns={columns}
                         dataSource={tableData}
                         width={tableWidth}
                         scroll={{ x: tableWidth - 100, y: 750 }}

@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Button, Icon, Table, Spin } from 'antd';
 import moment from 'moment';
+import Highlighter from 'react-highlight-words';
 
 import styles from '../CSS/DatabaseTable.module.css';
 import FormHandler from './Forms';
@@ -27,6 +28,8 @@ export default class DatabaseTable extends Component {
             tableData: this.props.dataSource,
 			selectedRowKeys: [],
 			selectedColumns: columns,
+			searchText: '',
+			searchedColumn: '',
         };
     };
 
@@ -37,7 +40,73 @@ export default class DatabaseTable extends Component {
                 selectedRowKeys: []
             });
         }
-    }
+	}
+
+	getColumnSearchProps = dataIndex => ({
+		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+			<div style={{ padding: 8 }}>
+				<Input
+					ref={node => {
+						this.searchInput = node;
+					}}
+					placeholder={`Search ${dataIndex}`}
+					value={selectedKeys[0]}
+					onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+					onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+					style={{ width: 188, marginBottom: 8, display: 'block' }}
+				/>
+				<Button
+					type="primary"
+					onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+					icon="search"
+					size="small"
+					style={{ width: 90, marginRight: 8 }}
+				>
+					Search
+        </Button>
+				<Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+					Reset
+        </Button>
+			</div>
+		),
+		filterIcon: filtered => (
+			<Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+		),
+		onFilter: (value, record) =>
+			record[dataIndex]
+				.toString()
+				.toLowerCase()
+				.includes(value.toLowerCase()),
+		onFilterDropdownVisibleChange: visible => {
+			if (visible) {
+				setTimeout(() => this.searchInput.select());
+			}
+		},
+		render: text =>
+			this.state.searchedColumn === dataIndex ? (
+				<Highlighter
+					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+					searchWords={[this.state.searchText]}
+					autoEscape
+					textToHighlight={text.toString()}
+				/>
+			) : (
+					text
+				),
+	});
+
+	handleSearch = (selectedKeys, confirm, dataIndex) => {
+		confirm();
+		this.setState({
+			searchText: selectedKeys[0],
+			searchedColumn: dataIndex,
+		});
+	};
+
+	handleReset = clearFilters => {
+		clearFilters();
+		this.setState({ searchText: '' });
+	};
 
     onSelectChange = selectedRowKeys => {
         this.setState({ selectedRowKeys });
@@ -108,6 +177,7 @@ const BookTableColumns = [
 		width: 175,
 		sorter: (a, b) => a.ISBN - b.ISBN,
 		render: text => <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a>,
+		...this.getColumnSearchProps('ISBN'),
 	},
 	{
 		title: 'Year Published',
@@ -120,11 +190,13 @@ const BookTableColumns = [
 			else
 				return moment(text).format('YYYY');
 		},
+		...this.getColumnSearchProps('year_published'),
 	},
 	{
 		title: 'Title',
 		dataIndex: 'title',
 		sorter: (a, b) => { return a.title.localeCompare(b.title) },
+		...this.getColumnSearchProps('title'),
 	},
 	{
 		title: 'Author ID',
@@ -132,6 +204,7 @@ const BookTableColumns = [
 		width: 250,
 		sorter: (a, b) => { return a.authorID.localeCompare(b.authorID) },
 		render: (text, record) => <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link>,
+		...this.getColumnSearchProps('authorID'),
 	},
 	{
 		title: 'Publisher ID',
@@ -139,6 +212,7 @@ const BookTableColumns = [
 		width: 250,
 		sorter: (a, b) => { return a.publisherID.localeCompare(b.publisherID) },
 		render: (text, record) => <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link>,
+		...this.getColumnSearchProps('publisherID'),
 	},
 ];
 
@@ -147,12 +221,14 @@ const AuthorTableColumns = [
 		title: 'Author ID',
 		dataIndex: 'authorID',
 		sorter: (a, b) => a.authorID - b.authorID,
+		...this.getColumnSearchProps('authorID'),
 	},
 	{
 		title: 'Name',
 		dataIndex: 'name',
 		width: 250,
 		sorter: (a, b) => { return a.name.localeCompare(b.name) },
+		...this.getColumnSearchProps('name'),
 	},
 	{
 		title: 'Date of Birth',
@@ -165,6 +241,7 @@ const AuthorTableColumns = [
 			else
 				return moment(text).format('LL');
 		},
+		...this.getColumnSearchProps('dob'),
 	},
 	{
 		title: 'Date of Death',
@@ -177,6 +254,7 @@ const AuthorTableColumns = [
 			else
 				return moment(text).format('LL');
 		},
+		...this.getColumnSearchProps('dod'),
 	},
 ];
 
@@ -186,10 +264,12 @@ const PublisherTableColumns = [
 		dataIndex: 'publisherID',
 		width: 125,
 		sorter: (a, b) => a.publisherID - b.publisherID,
+		...this.getColumnSearchProps('publisherID'),
 	},
 	{
 		title: 'Name',
 		dataIndex: 'name',
 		sorter: (a, b) => { return a.name.localeCompare(b.name) },
+		...this.getColumnSearchProps('name'),
 	},
 ];

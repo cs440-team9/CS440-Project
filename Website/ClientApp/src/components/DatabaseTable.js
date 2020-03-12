@@ -137,17 +137,10 @@ export default class DatabaseTable extends Component {
 
     componentDidUpdate(prevProps) {
 		if (prevProps.dataSource !== this.props.dataSource) {
-			var tempData = this.props.dataSource;
-			if (typeof this.props.dataSource.dob !== 'undefined') {
-				console.log("in it");
-				console.log(tempData);
-				tempData.dob = tempData.dob.substr(0, tempData.dob.indexOf('T'));
-				tempData.dod = tempData.dod.substr(0, tempData.dod.indexOf('T'));
-				console.log(tempData);
-			}
-
+			console.log("in it");
+			console.log(this.props.dataSource);
 			this.setState({
-                tableData: tempData,
+                tableData: this.props.dataSource,
                 selectedRowKeys: []
             });
         }

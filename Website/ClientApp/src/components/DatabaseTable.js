@@ -180,12 +180,13 @@ export default class DatabaseTable extends Component {
 		render: text => {
 			if (this.state.searchedColumn === dataIndex) {
 				console.log("in it");
-				return <Highlighter
+				return "Oh Wow"
+				/*<Highlighter
 					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
 					searchWords={[this.state.searchText]}
 					autoEscape
 					textToHighlight={text.toString()}
-				/>
+				/>*/
 			}
 			else
 				return text

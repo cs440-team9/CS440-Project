@@ -126,7 +126,7 @@ export default class DatabaseTable extends Component {
 			},
 		];
 
-		if (this.props.dataSource.dob !== 'undefined') {
+		if (typeof this.props.dataSource.dob !== 'undefined') {
 			this.props.dataSource.dob = moment(this.props.dataSource.dob).format('LL');
 			this.props.dataSource.dob = moment(this.props.dataSource.dod).format('LL');
 		}

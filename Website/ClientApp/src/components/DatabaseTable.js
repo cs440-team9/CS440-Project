@@ -137,10 +137,13 @@ export default class DatabaseTable extends Component {
 
     componentDidUpdate(prevProps) {
 		if (prevProps.dataSource !== this.props.dataSource) {
-
-			if (this.props.columns == "BookTableColumns") {
+			console.log(this.props.columns);
+			if (this.props.columns == "AuthorTableColumns") {
 				var tempData = this.props.dataSource;
+				console.log(tempData);
 				for (let i = 0; i < tempData.length; i++) {
+					console.log(tempData[i].dob);
+					console.log(tempData[i].dod);
 					if (tempData[i].dob !== null)
 						tempData[i].dob = tempData[i].dob.substr(0, tempData[i].dob.indexOf('T'));
 					if (tempData[i].dod !== null)

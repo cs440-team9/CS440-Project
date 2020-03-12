@@ -139,12 +139,15 @@ export default class DatabaseTable extends Component {
 			selectedRowKeys: [],
 			searchText: '',
 			searchedColumn: '',
-        };
+		};
+		console.log(this.props.dataSource);
     };
 
     componentDidUpdate(prevProps) {
         if (prevProps.dataSource !== this.props.dataSource) {
-            this.setState({
+			console.log(this.props.dataSource);
+
+			this.setState({
                 tableData: this.props.dataSource,
                 selectedRowKeys: []
             });

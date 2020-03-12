@@ -178,20 +178,17 @@ export default class DatabaseTable extends Component {
 			}
 		},
 		render: text => {
-			console.log(text);
-			console.log(this.state.searchedColumn);
-			console.log(dataIndex);
-
-			return this.state.searchedColumn === dataIndex ? (
-				<Highlighter
+			if (this.state.searchedColumn === dataIndex) {
+				console.log("in it");
+				return <Highlighter
 					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
 					searchWords={[this.state.searchText]}
 					autoEscape
 					textToHighlight={text.toString()}
 				/>
-			) : (
-					text
-				);
+			}
+			else
+				return text
 		},
 	});
 

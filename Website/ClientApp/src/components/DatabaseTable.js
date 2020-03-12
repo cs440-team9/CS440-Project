@@ -18,7 +18,6 @@ export default class DatabaseTable extends Component {
 				key: 'ISBN',
 				width: 175,
 				sorter: (a, b) => a.ISBN - b.ISBN,
-				render: text => { return <a href={"https://isbnsearch.org/isbn/" + text} target="_blank">{text}</a> },
 				...this.getColumnSearchProps('ISBN'),
 			},
 			{
@@ -48,7 +47,6 @@ export default class DatabaseTable extends Component {
 				key: 'authorID',
 				width: 250,
 				sorter: (a, b) => { return a.authorID.localeCompare(b.authorID) },
-				render: (text, record) => { return <Link to={'author/'} onClick={() => { window.location.href = '/author'; }}>{text}</Link> },
 				...this.getColumnSearchProps('authorID'),
 			},
 			{
@@ -57,7 +55,6 @@ export default class DatabaseTable extends Component {
 				key: 'publisherID',
 				width: 250,
 				sorter: (a, b) => { return a.publisherID.localeCompare(b.publisherID) },
-				render: (text, record) => { return <Link to={'publisher/'} onClick={() => { window.location.href = '/publisher'; }}>{text}</Link> },
 				...this.getColumnSearchProps('publisherID'),
 			},
 		];
@@ -84,12 +81,6 @@ export default class DatabaseTable extends Component {
 				key: 'dob',
 				width: 200,
 				sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
-				render: text => {
-					if (text === null)
-						return '';
-					else
-						return <span>{moment(text).format('LL')}</span>;
-				},
 				...this.getColumnSearchProps('dob'),
 			},
 			{
@@ -98,12 +89,6 @@ export default class DatabaseTable extends Component {
 				key: 'dod',
 				width: 200,
 				sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
-				render: text => {
-					if (text === null)
-						return 'test';
-					else
-						return <span>{moment(text).format('LL')}</span>;
-				},
 				...this.getColumnSearchProps('dod'),
 			},
 		];
@@ -132,18 +117,14 @@ export default class DatabaseTable extends Component {
 			searchText: '',
 			searchedColumn: '',
 		};
-		console.log(this.props.dataSource);
     };
 
     componentDidUpdate(prevProps) {
 		if (prevProps.dataSource !== this.props.dataSource) {
-			console.log(this.props.columns);
 			if (this.props.columns == "AuthorTableColumns") {
 				var tempData = this.props.dataSource;
-				console.log(tempData);
+
 				for (let i = 0; i < tempData.length; i++) {
-					console.log(tempData[i].dob);
-					console.log(tempData[i].dod);
 					if (tempData[i].dob !== null)
 						tempData[i].dob = tempData[i].dob.substr(0, tempData[i].dob.indexOf('T'));
 					if (tempData[i].dod !== null)
@@ -250,11 +231,6 @@ export default class DatabaseTable extends Component {
         const loading = {
             spinning: tableLoading,
             indicator: <Spin size="large" tip={<div className={styles.LoadingSpinTip}>Fetching from Database</div>} />,
-		}
-
-		if (tableData !== null) {
-			console.log(tableData);
-			console.log(moment(tableData.dob).format('LL'));
 		}
 
         return (

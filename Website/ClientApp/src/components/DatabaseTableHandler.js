@@ -53,7 +53,7 @@ export default class DatabaseTableHandler extends Component {
         await this.tableFetch();
     };
 
-	replaceIDs = async (type) => {
+	replaceIDs = async (type, reload = false) => {
 		// Replace all instances of ID with the associated name
 		await fetch(serverURL + "get_table/ex_" + type, {
 			method: "GET",
@@ -79,7 +79,13 @@ export default class DatabaseTableHandler extends Component {
 						}
 					}
 
-					this.setState({ tableData: tableDataCopy });
+					if (reload)
+						this.setState({
+							tableData: tableDataCopy,
+							tableLoading: false
+						});
+					else
+						this.setState({ tableData: tableDataCopy });
 				}, 1000);
 			});
 		}).catch(err => err);
@@ -109,22 +115,16 @@ export default class DatabaseTableHandler extends Component {
 
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
 		if (pageType === 'book') {
-			this.setState({
-				tableLoading: true
-			}, async () => {
-				await notification["info"]({
-					message: 'Table load in progress...',
-					description: 'Please be patient while table fetches author and publisher names.'
-				});
-
-				await this.replaceIDs('author');
-				await this.replaceIDs('publisher');
-				console.log("should still be loading")
+			console.log("in if");
+			await notification["info"]({
+				message: 'Table load in progress...',
+				description: 'Please be patient while table fetches author and publisher names.'
 			});
 
-			this.setState({ tableLoading: false });
-			console.log("done loading");
+			await this.replaceIDs('author');
+			await this.replaceIDs('publisher', true);
 		} else {
+			console.log("in else");
 			this.setState({ tableLoading: false });
 		}
     }

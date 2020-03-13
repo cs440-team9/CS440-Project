@@ -35,7 +35,7 @@ export default class DatabaseTable extends Component {
 				...this.getColumnSearchProps('title'),
 			},
 			{
-				title: 'Author ID',
+				title: 'Author',
 				dataIndex: 'authorID',
 				key: 'authorID',
 				width: 250,
@@ -43,7 +43,7 @@ export default class DatabaseTable extends Component {
 				...this.getColumnSearchProps('authorID'),
 			},
 			{
-				title: 'Publisher ID',
+				title: 'Publisher',
 				dataIndex: 'publisherID',
 				key: 'publisherID',
 				width: 250,
@@ -57,6 +57,7 @@ export default class DatabaseTable extends Component {
 				title: 'Author ID',
 				dataIndex: 'authorID',
 				key: 'authorID',
+				width: 100,
 				sorter: (a, b) => a.authorID - b.authorID,
 				...this.getColumnSearchProps('authorID'),
 			},
@@ -64,25 +65,8 @@ export default class DatabaseTable extends Component {
 				title: 'Name',
 				dataIndex: 'name',
 				key: 'name',
-				width: 250,
 				sorter: (a, b) => { return a.name.localeCompare(b.name) },
 				...this.getColumnSearchProps('name'),
-			},
-			{
-				title: 'Date of Birth',
-				dataIndex: 'dob',
-				key: 'dob',
-				width: 200,
-				sorter: (a, b) => moment(a.dob).unix() - moment(b.dob).unix(),
-				...this.getColumnSearchProps('dob'),
-			},
-			{
-				title: 'Date of Death',
-				dataIndex: 'dod',
-				key: 'dod',
-				width: 200,
-				sorter: (a, b) => moment(a.dod).unix() - moment(b.dod).unix(),
-				...this.getColumnSearchProps('dod'),
 			},
 		];
 

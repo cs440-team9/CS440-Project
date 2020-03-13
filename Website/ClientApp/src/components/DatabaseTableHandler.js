@@ -60,17 +60,12 @@ export default class DatabaseTableHandler extends Component {
 			headers: {
 				"Accept": "application/json"
 			}
-		}).then(async (res) => {
-			res.json().then(async (data) => {
+		}).then((res) => {
+			res.json().then((data) => {
 				setTimeout(() => {
 					// Copy this.state.tableData into a new array.
 					var tableDataCopy = [...this.state.tableData];
 					var newData = "";
-
-					notification["info"]({
-						message: 'Table load in progress...',
-						description: 'Please be patient while table fetches author and publisher names.'
-					});
 
 					// Run through all datapoints in the table, replacing ID with associated name
 					for (let i = 0; i < tableDataCopy.length; i++) {
@@ -114,11 +109,17 @@ export default class DatabaseTableHandler extends Component {
 
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
 		if (pageType === 'book') {
+			notification["info"]({
+				message: 'Table load in progress...',
+				description: 'Please be patient while table fetches author and publisher names.'
+			});
+
 			await this.replaceIDs('author');
 			await this.replaceIDs('publisher');
+			this.setState({ tableLoading: false });
+		} else {
+			this.setState({ tableLoading: false });
 		}
-
-		this.setState({ tableLoading: false });
     }
 
 	/* Callback function so form can pass it's data to this component.

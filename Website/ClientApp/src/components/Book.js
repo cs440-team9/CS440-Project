@@ -131,7 +131,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 											dropdownMatchSelectWidth={false}
 											style={{ width: 190 }}
 											optionFilterProp="children"
-											filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.indexOf(input.toLowerCase()) >= 0}
+											filterOption={(input, option) => console.log(typeof option.props.value, option.props.value)}//option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.indexOf(input.toLowerCase()) >= 0}
 										>
                                             {this.authorDropdown}
                                         </SuperSelect>

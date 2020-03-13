@@ -2,6 +2,7 @@
 import { DatePicker, Form, Input, Modal, Row, Col, Select } from 'antd';
 import { serverURL } from '../App';
 import moment from 'moment';
+import SuperSelect from "../SuperSelect";
 
 const { Option } = Select;
 
@@ -124,9 +125,9 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										rules: [{ required: true, message: 'Author is required' }],
 										initialValue: formData.authorID || undefined,
                                     })(
-                                        <Select showSearch placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
+                                        <SuperSelect showSearch placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
                                             {this.authorDropdown}
-                                        </Select>
+                                        </SuperSelect>
                                     )}
                                 </Form.Item>
                             </Col>
@@ -136,9 +137,9 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										rules: [{ required: true, message: 'Publisher is required' }],
 										initialValue: formData.publisherID || undefined,
                                     })(
-                                        <Select showSearch placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
+                                        <SuperSelect showSearch placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
 											{this.publisherDropdown}
-                                        </Select>
+                                        </SuperSelect>
                                     )}
                                 </Form.Item>
                             </Col>

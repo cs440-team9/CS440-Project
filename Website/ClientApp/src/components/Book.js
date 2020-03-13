@@ -86,7 +86,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 		}
 
 		handleSelectChange = (value, type) => {
-			const { setFieldsValue } = form;
+			const { setFieldsValue } = this.props.form;
 
 			if (type === "author")
 				setFieldsValue({ authorID: value });

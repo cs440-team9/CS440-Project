@@ -115,16 +115,14 @@ export default class DatabaseTableHandler extends Component {
 
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
 		if (pageType === 'book') {
-			console.log("in if");
 			await notification["info"]({
 				message: 'Table load in progress...',
-				description: 'Please be patient while table fetches author and publisher names.'
+				description: 'Please be patient while table fetches author and publisher names. This should only take a minute.'
 			});
 
 			await this.replaceIDs('author');
 			await this.replaceIDs('publisher', true);
 		} else {
-			console.log("in else");
 			this.setState({ tableLoading: false });
 		}
     }

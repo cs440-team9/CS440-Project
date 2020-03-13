@@ -12,6 +12,9 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
         constructor(props) {
             super(props);
 
+			this.authorDropdown = null;
+			this.publisherDropdown = null;
+
             var data = {
                 ISBN: null,
                 year_published: null,
@@ -25,9 +28,9 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 
 		// Called after constructor(), before render()
         componentDidMount = async () => {
-            // Populate author/publisher dropdown menus by fetching author/publisher tables
-            this.getTable("author");
-            this.getTable("publisher");
+			// Populate author/publisher dropdown menus by fetching author/publisher tables
+			this.getTable("author");
+			this.getTable("publisher");
         }
 
         componentDidUpdate(prevProps) {
@@ -56,8 +59,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                 });
 
 				// Refresh the author/publisher dropdowns.
-                this.getTable("author");
-                this.getTable("publisher");
+				this.getTable("author");
+				this.getTable("publisher");
             }
         }
 
@@ -76,7 +79,8 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                     for (let i = 0; i < data.length; i++)
                         dropdown.push(<Option key={data[i][tableName + "ID"]}>{data[i].name}</Option>);
 
-                    this.setState({ [tableName + "Dropdown"]: dropdown });
+					this[tableName + "Dropdown"] = dropdown;
+                    //this.setState({ [tableName + "Dropdown"]: dropdown });
                 });
             }).catch(err => err);
         }
@@ -121,7 +125,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										initialValue: formData.authorID || undefined,
                                     })(
                                         <Select showSearch placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
-                                            {this.state.authorDropdown}
+                                            {this.authorDropdown}
                                         </Select>
                                     )}
                                 </Form.Item>
@@ -133,7 +137,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										initialValue: formData.publisherID || undefined,
                                     })(
                                         <Select showSearch placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
-                                            {this.state.publisherDropdown}
+											{this.publisherDropdown}
                                         </Select>
                                     )}
                                 </Form.Item>

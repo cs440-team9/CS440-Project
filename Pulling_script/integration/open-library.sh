@@ -2,7 +2,7 @@
 
 # Shell script to automate adding a letter to search queries
 
-for i in {d..z}
+for i in {a..z}
   do
     # printf $i
     printf "================= Add letter $i to query\n"

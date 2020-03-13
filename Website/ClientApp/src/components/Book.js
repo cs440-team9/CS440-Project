@@ -78,7 +78,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                     var dropdown = [];
 
                     for (let i = 0; i < data.length; i++)
-                        dropdown.push(<Option key={data[i][tableName + "ID"]}>{data[i].name}</Option>);
+                        dropdown.push(<Option value={data[i][tableName + "ID"]}>{data[i].name}</Option>);
 
 					this[tableName + "Dropdown"] = dropdown;
                     //this.setState({ [tableName + "Dropdown"]: dropdown });

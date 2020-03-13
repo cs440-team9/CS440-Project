@@ -18,17 +18,35 @@ app.get('/', function (req, res, next) {
 // Fetch a table from the database that matches the passed tableID
 app.get('/get_table/:tableID', function (req, res, next) {
 	var id = req.params.tableID;
+	
+	/* If getting ex_book, get join of ex_book/ex_author/ex_publisher on IDs. */
+	if (id === "ex_book") {
+		var queryBook = `SELECT ex_book.ISBN, ex_book.year_published, ex_book.title, ex_author.name AS authorID, ex_publisher.name AS publisherID FROM ex_book
+		                 JOIN ex_author ON ex_author.authorID = ex_book.authorID
+						 JOIN ex_publisher ON ex_publisher.publisherID = ex_book.publisherID`;
+		
+		mysql.pool.query(queryBook, function (err, rows, fields) {
+			if (err) {
+				next(err);
+				return;
+			}
 
-	var query = 'SELECT * FROM ' + id;
+			res.json(rows);
+		});
+		
+	} else {
+		var queryNonBook = 'SELECT * FROM ' + id;
 
-	mysql.pool.query(query, function (err, rows, fields) {
-		if (err) {
-			next(err);
-			return;
-		}
+		mysql.pool.query(queryNonBook, function (err, rows, fields) {
+			if (err) {
+				next(err);
+				return;
+			}
 
-		res.json(rows);
-	});
+			res.json(rows);
+		});
+	}
+	
 });
 
 

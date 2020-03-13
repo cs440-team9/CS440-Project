@@ -112,7 +112,7 @@ export default class DatabaseTableHandler extends Component {
             });
         }).catch(err => err);
 
-
+		/*
         // Change the columns that display IDs of foreign keys to display the string instead of the number.
 		if (pageType === 'book') {
 			await notification["info"]({
@@ -123,8 +123,9 @@ export default class DatabaseTableHandler extends Component {
 			await this.replaceIDs('author');
 			await this.replaceIDs('publisher', true);
 		} else {
-			this.setState({ tableLoading: false });
-		}
+		*/
+
+		this.setState({ tableLoading: false });
     }
 
 	/* Callback function so form can pass it's data to this component.

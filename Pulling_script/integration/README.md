@@ -5,6 +5,8 @@ This portion of the project involves pulling a massive amount of data from exter
 
 ### Open Library API
 
+- Reimplement books import script to insert data with author and publisher IDs, not names (relationality)
+- Implement scripts to import authors and publishers separately
 - Add bash script to automate adding a letter to search queries
 - Also for queries 'ab' to 'zb'
 - Retrieved and integrated books from Open Library API with queries from 'a' to 'z', and 'aa' to 'za'.
@@ -17,10 +19,10 @@ For best results, ensure you have Node v12 or higher. (v10 may work, but use at 
 To write API data and errors to files, run:
 
 ``` bash
-node goodread.js >> goodreads.xml 2>> goodreads-error.txt
+node open-library.js >> output.txt 2>> error.txt
 ```
 
-Replace `goodreads.js` and the names of output files with the name of the respective API.
+Replace `open-library.js` with the name of the respective API.
 
 ## `config.js`
 

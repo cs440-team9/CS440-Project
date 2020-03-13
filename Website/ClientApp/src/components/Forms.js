@@ -88,7 +88,9 @@ export default class FormHandler extends Component {
                 break;
             case 'Publisher':
                 FormName = AddPublisherForm;
-                break;
+				break;
+			default:
+				break;
         }
 
         return (

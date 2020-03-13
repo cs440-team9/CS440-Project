@@ -2,12 +2,6 @@
 import DatabaseTable from './DatabaseTable';
 import { serverURL } from '../App';
 
-import {
-    BookTableColumns,
-    AuthorTableColumns,
-    PublisherTableColumns,
-} from './TableColumns';
-
 function toTitleCase(str) {
     if (typeof str === "undefined" || str === null) {
         return "";
@@ -37,18 +31,18 @@ export default class DatabaseTableHandler extends Component {
 		/* Set information about table, including what columns to use, the table's
 		 * width, and what key to use at the row's unique identifier. */
         if (pageType === 'Book') {
-            this.columns = BookTableColumns;
+            this.columns = "BookTableColumns";
             this.tableWidth = 1500;
             this.rowKey = "ISBN";
         }
         else if (pageType === 'Author') {
-            this.columns = AuthorTableColumns;
-            this.tableWidth = 850;
+            this.columns = "AuthorTableColumns";
+            this.tableWidth = 875;
             this.rowKey = "authorID";
         }
         else if (pageType === 'Publisher') {
-            this.columns = PublisherTableColumns;
-            this.tableWidth = 600;
+            this.columns = "PublisherTableColumns";
+            this.tableWidth = 625;
             this.rowKey = "publisherID";
         }
     }
@@ -67,20 +61,25 @@ export default class DatabaseTableHandler extends Component {
 			}
 		}).then(async (res) => {
 			res.json().then(async (data) => {
-				// Copy this.state.tableData into a new array.
-				var tableDataCopy = [...this.state.tableData];
-				var newData = "";
+				setTimeout(() => {
+					// Copy this.state.tableData into a new array.
+					var tableDataCopy = [...this.state.tableData];
+					var newData = "";
 
-				// Run through all datapoints in the table, replacing ID with associated name
-				for (let i = 0; i < tableDataCopy.length; i++) {
-					var ID = parseInt(tableDataCopy[i][type + 'ID']);
+					// Run through all datapoints in the table, replacing ID with associated name
+					for (let i = 0; i < tableDataCopy.length; i++) {
+						if (tableDataCopy[i][type + 'ID'] !== null) {
+							//var ID = parseInt(tableDataCopy[i][type + 'ID']);
+							var ID = tableDataCopy[i][type + 'ID'];
 
-					newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
+							newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
 
-					tableDataCopy[i][type + 'ID'] = newData;
-				}
+							tableDataCopy[i][type + 'ID'] = newData;
+						}
+					}
 
-				this.setState({ tableData: tableDataCopy });
+					this.setState({ tableData: tableDataCopy });
+				}, 1000);
 			});
 		}).catch(err => err);
 	}

@@ -62,7 +62,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
         }
 
         getTable = (tableName) => {
-            // Fetch the degree table to get values for select component
+            // Fetch the table to get values for select component
             fetch(serverURL + "get_table/ex_" + tableName, {
                 method: "GET",
                 headers: {
@@ -142,7 +142,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 
 						<Form.Item label="Year Published" style={{ marginBottom: "0px" }}>
 							{getFieldDecorator('year_published', {
-								initialValue: formData.year_published == null ? null : moment(formData.year_published).format('YYYY'),
+								initialValue: formData.year_published == null ? null : moment(formData.year_published, 'YYYY-MM-DD').add(1, 'days'),
 							})(<DatePicker format={dateFormat} />)}
 						</Form.Item>
                     </Form>

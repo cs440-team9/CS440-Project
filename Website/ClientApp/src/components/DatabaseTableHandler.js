@@ -117,8 +117,8 @@ export default class DatabaseTableHandler extends Component {
 					description: 'Please be patient while table fetches author and publisher names.'
 				});
 
-				await this.replaceIDs('author');
-				await this.replaceIDs('publisher');
+				this.replaceIDs('author');
+				this.replaceIDs('publisher');
 			});
 
 			this.setState({ tableLoading: false });

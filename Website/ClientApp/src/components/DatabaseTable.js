@@ -1,6 +1,5 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { Button, Icon, Input, Table, Spin } from 'antd';
-import moment from 'moment';
 import Highlighter from 'react-highlight-words';
 
 import styles from '../CSS/DatabaseTable.module.css';

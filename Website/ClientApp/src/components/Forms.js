@@ -56,6 +56,8 @@ export default class FormHandler extends Component {
                 return;
 			}
 
+			console.log("Received values of form: ", values);
+
 			/* Need to remove everything from year_published that isn't the year. */
 			if (typeof values.year_published !== 'undefined')
 				values.year_published = moment(values.year_published).format('YYYY');

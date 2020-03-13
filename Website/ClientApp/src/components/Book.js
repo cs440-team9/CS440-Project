@@ -80,15 +80,18 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                     for (let i = 0; i < data.length; i++)
                         dropdown.push(<Option key={data[i][tableName + "ID"]}>{data[i].name}</Option>);
 
-					console.log(dropdown);
 					this[tableName + "Dropdown"] = dropdown;
                 });
             }).catch(err => err);
 		}
 
 		handleSelectChange = (value, type) => {
-			console.log(value);
-			console.log(type);
+			const { setFieldsValue } = form;
+
+			if (type === "author")
+				setFieldsValue({ authorID: value });
+			else
+				setFieldsValue({ publisherID: value });
 		}
 
         render() {
@@ -153,6 +156,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 											showSearch
 											placeholder="Select publisher"
 											style={{ width: 190 }}
+											onSelect={(value) => this.handleSelectChange(value, "publisher")}
 											optionFilterProp="children"
 											filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
 										>

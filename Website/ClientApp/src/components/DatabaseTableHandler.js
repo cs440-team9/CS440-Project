@@ -53,44 +53,6 @@ export default class DatabaseTableHandler extends Component {
         await this.tableFetch();
     };
 
-	replaceIDs = async (type, reload = false) => {
-		// Replace all instances of ID with the associated name
-		await fetch(serverURL + "get_table/ex_" + type, {
-			method: "GET",
-			headers: {
-				"Accept": "application/json"
-			}
-		}).then((res) => {
-			res.json().then((data) => {
-				setTimeout(() => {
-					// Copy this.state.tableData into a new array.
-					var tableDataCopy = [...this.state.tableData];
-					var newData = "";
-
-					// Run through all datapoints in the table, replacing ID with associated name
-					for (let i = 0; i < tableDataCopy.length; i++) {
-						if (tableDataCopy[i][type + 'ID'] !== null) {
-							//var ID = parseInt(tableDataCopy[i][type + 'ID']);
-							var ID = tableDataCopy[i][type + 'ID'];
-
-							newData = ID + " - " + data.find(item => item[type + 'ID'] == ID).name;
-
-							tableDataCopy[i][type + 'ID'] = newData;
-						}
-					}
-
-					if (reload)
-						this.setState({
-							tableData: tableDataCopy,
-							tableLoading: false
-						});
-					else
-						this.setState({ tableData: tableDataCopy });
-				}, 1000);
-			});
-		}).catch(err => err);
-	}
-
 	// Fetch the appropriate table. If fetching 'ex_book', replace author/publisherIDs with associated names.
     tableFetch = async () => {
         var pageType = this.props.pageType;
@@ -111,19 +73,6 @@ export default class DatabaseTableHandler extends Component {
                 })
             });
         }).catch(err => err);
-
-		/*
-        // Change the columns that display IDs of foreign keys to display the string instead of the number.
-		if (pageType === 'book') {
-			await notification["info"]({
-				message: 'Table load in progress...',
-				description: 'Please be patient while table fetches author and publisher names. This should only take a minute.'
-			});
-
-			await this.replaceIDs('author');
-			await this.replaceIDs('publisher', true);
-		} else {
-		*/
 
 		this.setState({ tableLoading: false });
     }

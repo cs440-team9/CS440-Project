@@ -125,7 +125,14 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										rules: [{ required: true, message: 'Author is required' }],
 										initialValue: formData.authorID || undefined,
                                     })(
-                                        <SuperSelect showSearch placeholder="Select author" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
+										<SuperSelect
+											showSearch
+											placeholder="Select author"
+											dropdownMatchSelectWidth={false}
+											style={{ width: 190 }}
+											optionFilterProp="children"
+											filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+										>
                                             {this.authorDropdown}
                                         </SuperSelect>
                                     )}
@@ -137,7 +144,14 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
 										rules: [{ required: true, message: 'Publisher is required' }],
 										initialValue: formData.publisherID || undefined,
                                     })(
-                                        <SuperSelect showSearch placeholder="Select publisher" dropdownMatchSelectWidth={false} style={{ width: 190 }}>
+										<SuperSelect
+											showSearch
+											placeholder="Select publisher"
+											dropdownMatchSelectWidth={false}
+											style={{ width: 190 }}
+											optionFilterProp="children"
+											filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 || option.props.value.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+										>
 											{this.publisherDropdown}
                                         </SuperSelect>
                                     )}

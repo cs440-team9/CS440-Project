@@ -1,4 +1,5 @@
 ﻿import React, { Component, Fragment } from 'react';
+import { notification } from 'antd';
 import DatabaseTable from './DatabaseTable';
 import { serverURL } from '../App';
 
@@ -66,6 +67,11 @@ export default class DatabaseTableHandler extends Component {
 					var tableDataCopy = [...this.state.tableData];
 					var newData = "";
 
+					notification["info"]({
+						message: 'Table load in progress...',
+						description: 'Please be patient while table fetches author and publisher names.'
+					});
+
 					// Run through all datapoints in the table, replacing ID with associated name
 					for (let i = 0; i < tableDataCopy.length; i++) {
 						if (tableDataCopy[i][type + 'ID'] !== null) {
@@ -101,7 +107,6 @@ export default class DatabaseTableHandler extends Component {
             res.json().then(async (data) => {
                 await this.setState({
                     tableData: data,
-                    tableLoading: false
                 })
             });
         }).catch(err => err);
@@ -111,7 +116,9 @@ export default class DatabaseTableHandler extends Component {
 		if (pageType === 'book') {
 			await this.replaceIDs('author');
 			await this.replaceIDs('publisher');
-        }
+		}
+
+		this.setState({ tableLoading: false });
     }
 
 	/* Callback function so form can pass it's data to this component.

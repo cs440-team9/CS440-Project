@@ -111,17 +111,19 @@ export default class DatabaseTableHandler extends Component {
 		if (pageType === 'book') {
 			this.setState({
 				tableLoading: true
-			}, () => {
-				notification["info"]({
+			}, async () => {
+				await notification["info"]({
 					message: 'Table load in progress...',
 					description: 'Please be patient while table fetches author and publisher names.'
 				});
 
-				this.replaceIDs('author');
-				this.replaceIDs('publisher');
+				await this.replaceIDs('author');
+				await this.replaceIDs('publisher');
+				console.log("should still be loading")
 			});
 
 			this.setState({ tableLoading: false });
+			console.log("done loading");
 		} else {
 			this.setState({ tableLoading: false });
 		}

@@ -131,7 +131,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                                 <Form.Item label="Author" style={{ marginBottom: "0px" }}>
 									{getFieldDecorator('authorID', {
 										rules: [{ required: true, message: 'Author is required' }],
-										initialValue: formData.authorID || undefined,
+										initialValue: undefined,
                                     })(
 										<SuperSelect
 											showSearch
@@ -150,7 +150,7 @@ const AddBookForm = Form.create({ name: 'add-book-form' })(    // Don't forget t
                                 <Form.Item label="Publisher" style={{ marginBottom: "0px" }}>
 									{getFieldDecorator('publisherID', {
 										rules: [{ required: true, message: 'Publisher is required' }],
-										initialValue: formData.publisherID || undefined,
+										initialValue: undefined,
                                     })(
 										<SuperSelect
 											showSearch
